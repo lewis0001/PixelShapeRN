@@ -106,3 +106,46 @@ registry modules + firmware drivers, per the plan's own extension rules.
 `next lint` on Next.js 14 requires eslint 8 + eslint-config-next. Rest of the
 workspace uses the root prettier + per-package `tsc --noEmit` for linting in
 Phase 0. Revisit if/when the web app moves to Next 15.
+
+## 2026-07-12 — Phase 2 firmware core: §5.4/§5.5 interpretation calls
+
+Decisions made while implementing packages/firmware/src/{main.cpp,core,drivers}
+(none change a frozen contract; they fill gaps the PLAN leaves open):
+
+- **WS/HTTP stack:** bundled synchronous `WebServer.h` (port 80) +
+  `links2004/WebSockets` (port 81). Boring, huge training/data coverage; async
+  buys nothing at 5 Hz telemetry. `WebSocketsServer` does not filter request
+  paths — clients use `ws://host:81/ws` per §5.4 and any path is accepted.
+- **cfg_hash:** one tiny self-contained SHA-256 (`core/Sha256.h`) on BOTH
+  target and native instead of mbedtls-on-target, so the reported hash and the
+  native-test hash share one code path. Vectors tested in test_core.
+- **/wifi.json shape (unspecified):** `{"ssid","pass","name"}`; `name` is the
+  user-chosen robot name from the portal, falling back to `name_default`.
+- **Portal provisioning endpoints (unspecified):** `GET /provision/scan` and
+  `POST /provision` on port 80, deliberately outside the frozen `/api` set.
+  QR on the success screen: text-fallback (big tappable URL) instead of an
+  inline QR generator — allowed by Phase 2.4, keeps the page at 6.4 KB.
+- **Autostart flag storage:** `/autostart_off` marker file on LittleFS
+  (absent = autostart on). `behavior/ctl run` with no uploaded behavior loads
+  `/behavior.json`.
+- **PUT /api/config reboots** (after replying `{ok,cfg_hash,rebooting:true}`):
+  drivers re-init from config only at boot; a reboot is the simplest correct
+  apply.
+- **mode messages:** `manual` stops the VM, hard-stops motors and arms the
+  800 ms deadman; `behavior` disarms the deadman and (re)starts the loaded
+  behavior. Deadman trip = hard stop (bypasses motor slew).
+- **Line_TCRT pin names:** engine emits registry names `out_l`/`out_r`; the
+  §5.5 example shows `l`/`r`. The driver accepts both spellings.
+- **telemetry sources:** `batt_mv` from whichever module answers read("mv")
+  (PowerMon; 0 = unknown since the rover shield has no divider, vbat_adc null);
+  `sensors` built from a `telemetryFields()` additive extension on IModule
+  (default "" keeps the PLAN interface contract).
+- **OTA check-on-boot:** optional top-level config keys `ota_check` (+
+  `ota_url` override) — additive, engine does not emit them yet. GitHub TLS
+  via setInsecure(): opt-in channel, LAN POST /api/ota stays primary.
+- **BSJ rand inclusivity:** VmHal `random(lo,hi)` treats both ends inclusive
+  (Appendix B uses `rand [0,1]` as a coin flip); Arduino `random()` upper
+  bound is exclusive, so the bridge passes `hi+1`.
+- **ArduinoJson in the native env lib_deps:** header-only and platform-free;
+  required by native tests that parse the real rover config.json (and by the
+  VM's BSJ tests). Device-only libs remain esp32s3-only.
