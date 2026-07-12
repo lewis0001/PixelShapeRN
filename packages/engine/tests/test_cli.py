@@ -40,16 +40,16 @@ def test_validate_bad_fixture_exits_one() -> None:
     assert "unknown module ref 'no-such-module'" in result.output
 
 
-def test_build_only_fw_config_skips_unimplemented_generator(tmp_path: Path) -> None:
+def test_build_only_fw_config_writes_manifest_and_config(tmp_path: Path) -> None:
     result = runner.invoke(
         app,
         ["build", str(GOOD_ROBOT), "--only", "fw_config", "--dist", str(tmp_path)],
     )
     assert result.exit_code == 0, result.output
-    assert "fw_config: skipped (not implemented)" in result.output
     manifest = tmp_path / "good-bot" / "manifest.resolved.json"
     assert manifest.is_file()
     assert '"from"' in manifest.read_text(encoding="utf-8")
+    assert (tmp_path / "good-bot" / "firmware" / "config.json").is_file()
 
 
 def test_build_aborts_on_validation_errors(tmp_path: Path) -> None:
