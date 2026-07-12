@@ -1,0 +1,35 @@
+{
+  "name": "01_blink_sequence",
+  "desc": "Sequential ops + non-blocking waits (the real _test-min blink.json). wait 200 started at t=0 resumes at t=200; on_tick 500 first fires at t=500; its wait 250 outlives run_ms.",
+  "tick_ms": 20,
+  "run_ms": 600,
+  "sensors": {},
+  "random": [],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "blink",
+    "vars": [],
+    "handlers": [
+      {
+        "event": { "type": "on_start" },
+        "body": [
+          { "op": "led", "r": 0, "g": 120, "b": 40 },
+          { "op": "tone", "hz": 880, "ms": 100 },
+          { "op": "wait", "ms": 200 },
+          { "op": "led_off" }
+        ]
+      },
+      {
+        "event": { "type": "on_tick", "ms": 500 },
+        "body": [
+          { "op": "led", "r": 0, "g": 0, "b": 90 },
+          { "op": "wait", "ms": 250 },
+          { "op": "led_off" }
+        ]
+      },
+      { "event": { "type": "on_button" }, "body": [{ "op": "stop" }, { "op": "led_off" }] }
+    ]
+  },
+  "expected": ["0 led 0 120 40 -1", "0 tone 880 100", "200 led_off -1", "500 led 0 0 90 -1"]
+}

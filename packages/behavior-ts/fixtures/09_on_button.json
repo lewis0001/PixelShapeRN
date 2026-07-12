@@ -1,0 +1,29 @@
+{
+  "name": "09_on_button",
+  "desc": "on_button fires immediately at press time (before that tick). Press at t=100 starts the handler (blocked until 250, resumes at tick 260); press at t=200 while it still runs is skipped; press at t=340 fires again.",
+  "tick_ms": 20,
+  "run_ms": 400,
+  "sensors": {},
+  "random": [],
+  "buttons": [100, 200, 340],
+  "program": {
+    "bsj": 1,
+    "name": "on_button",
+    "vars": [],
+    "handlers": [
+      {
+        "event": { "type": "on_start" },
+        "body": [{ "op": "led", "r": 0, "g": 0, "b": 50 }]
+      },
+      {
+        "event": { "type": "on_button" },
+        "body": [
+          { "op": "tone", "hz": 1000, "ms": 30 },
+          { "op": "wait", "ms": 150 },
+          { "op": "tone", "hz": 1200, "ms": 30 }
+        ]
+      }
+    ]
+  },
+  "expected": ["0 led 0 0 50 -1", "100 tone 1000 30", "260 tone 1200 30", "340 tone 1000 30"]
+}

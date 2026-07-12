@@ -1,0 +1,22 @@
+{
+  "name": "08_runaway_guard",
+  "desc": "forever { change_var } with no wait exceeds the 200-op budget in the very first step: runtime error -> drive(0,0), log level 3, behavior halted (later ticks are no-ops).",
+  "tick_ms": 20,
+  "run_ms": 60,
+  "sensors": {},
+  "random": [],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "runaway_guard",
+    "vars": [{ "name": "x", "init": 0 }],
+    "handlers": [
+      {
+        "event": { "type": "on_start" },
+        "body": [{ "op": "forever", "body": [{ "op": "change_var", "name": "x", "value": 1 }] }]
+      }
+    ]
+  },
+  "expected": ["0 drive 0 0", "0 log 3 op budget exceeded"],
+  "expect_error": "op budget exceeded"
+}

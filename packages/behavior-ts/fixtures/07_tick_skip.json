@@ -1,0 +1,24 @@
+{
+  "name": "07_tick_skip",
+  "desc": "on_tick 40 whose body blocks for 100 ms: due firings at 80/120 (then 200/240, 320/360) are skipped while the previous activation runs; the schedule stays anchored so the next fires land at 160/280/400.",
+  "tick_ms": 20,
+  "run_ms": 400,
+  "sensors": {},
+  "random": [],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "tick_skip",
+    "vars": [],
+    "handlers": [
+      {
+        "event": { "type": "on_tick", "ms": 40 },
+        "body": [
+          { "op": "tone", "hz": 700, "ms": 10 },
+          { "op": "wait", "ms": 100 }
+        ]
+      }
+    ]
+  },
+  "expected": ["40 tone 700 10", "160 tone 700 10", "280 tone 700 10", "400 tone 700 10"]
+}

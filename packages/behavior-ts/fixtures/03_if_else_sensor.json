@@ -1,0 +1,46 @@
+{
+  "name": "03_if_else_sensor",
+  "desc": "if/else branching on a scripted range.mm step profile: clear (400 mm) at t=100, obstacle (100 mm) from t=150 onward.",
+  "tick_ms": 20,
+  "run_ms": 300,
+  "sensors": {
+    "range.mm": [
+      [0, 400],
+      [150, 100]
+    ]
+  },
+  "random": [],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "if_else_sensor",
+    "vars": [],
+    "handlers": [
+      {
+        "event": { "type": "on_tick", "ms": 100 },
+        "body": [
+          {
+            "op": "if",
+            "cond": { "cmp": [{ "sensor": "range.mm" }, "<", 150] },
+            "body": [
+              { "op": "led", "r": 120, "g": 0, "b": 0 },
+              { "op": "drive", "l": -40, "r": -40 }
+            ],
+            "else": [
+              { "op": "led", "r": 0, "g": 80, "b": 0 },
+              { "op": "drive", "l": 60, "r": 60 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "expected": [
+    "100 led 0 80 0 -1",
+    "100 drive 60 60",
+    "200 led 120 0 0 -1",
+    "200 drive -40 -40",
+    "300 led 120 0 0 -1",
+    "300 drive -40 -40"
+  ]
+}

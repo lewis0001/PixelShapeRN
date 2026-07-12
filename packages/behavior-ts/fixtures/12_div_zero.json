@@ -1,0 +1,26 @@
+{
+  "name": "12_div_zero",
+  "desc": "Division by a variable holding 0 is a runtime error: prior HAL calls stay in the trace, then drive(0,0) + log level 3, and error() reports it.",
+  "tick_ms": 20,
+  "run_ms": 40,
+  "sensors": {},
+  "random": [],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "div_zero",
+    "vars": [{ "name": "z", "init": 0 }],
+    "handlers": [
+      {
+        "event": { "type": "on_start" },
+        "body": [
+          { "op": "log", "msg": "before" },
+          { "op": "drive", "l": 30, "r": 30 },
+          { "op": "set_var", "name": "z", "value": { "math": [10, "/", { "var": "z" }] } }
+        ]
+      }
+    ]
+  },
+  "expected": ["0 log 1 before", "0 drive 30 30", "0 drive 0 0", "0 log 3 division by zero"],
+  "expect_error": "division by zero"
+}

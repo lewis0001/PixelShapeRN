@@ -1,20 +1,26 @@
 /**
  * @botforge/behavior-ts — Behavior Script JSON (BSJ) types, zod schema, and
- * reference interpreter. Phase-0 placeholder; real implementation lands in
- * Phase 1.
+ * reference interpreter (PLAN.md §5.3). The C++ firmware VM
+ * (packages/firmware/src/vm) implements identical semantics — see
+ * SEMANTICS.md and the shared golden-trace fixtures in ./fixtures.
  */
 
-/** Current Behavior Script JSON (BSJ) format version. */
-export const BSJ_VERSION = 1;
+export {
+  BSJ_VERSION,
+  BSJ_LIMITS,
+  LOG_LEVEL,
+  type BsjProgram,
+  type BsjHandler,
+  type BsjEvent,
+  type BsjVar,
+  type Stmt,
+  type Expr,
+  type CmpOperator,
+  type MathOperator,
+  type LogicOperator,
+  type CallName,
+} from "./types.js";
 
-/**
- * Placeholder stub for a Behavior Script JSON program.
- *
- * The full BSJ program structure (nodes, edges, triggers, actions) is
- * specified in the project plan, §5.3. This stub will be replaced by the
- * complete zod-derived type in Phase 1.
- */
-export type BsjProgram = {
-  /** BSJ format version; must equal {@link BSJ_VERSION}. */
-  version: typeof BSJ_VERSION;
-};
+export { bsjProgramSchema, exprSchema, stmtSchema, parseBsj, countStatements } from "./schema.js";
+
+export { BsjInterpreter, type RobotAdapter } from "./interpreter.js";

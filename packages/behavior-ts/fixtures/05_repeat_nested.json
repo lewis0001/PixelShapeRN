@@ -1,0 +1,42 @@
+{
+  "name": "05_repeat_nested",
+  "desc": "repeat 3 with a nested repeat 2 inside: exact iteration counts and ordering, all within one tick.",
+  "tick_ms": 20,
+  "run_ms": 40,
+  "sensors": {},
+  "random": [],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "repeat_nested",
+    "vars": [],
+    "handlers": [
+      {
+        "event": { "type": "on_start" },
+        "body": [
+          {
+            "op": "repeat",
+            "n": 3,
+            "body": [
+              { "op": "tone", "hz": 300, "ms": 15 },
+              { "op": "repeat", "n": 2, "body": [{ "op": "tone", "hz": 900, "ms": 10 }] }
+            ]
+          },
+          { "op": "log", "msg": "repeats done" }
+        ]
+      }
+    ]
+  },
+  "expected": [
+    "0 tone 300 15",
+    "0 tone 900 10",
+    "0 tone 900 10",
+    "0 tone 300 15",
+    "0 tone 900 10",
+    "0 tone 900 10",
+    "0 tone 300 15",
+    "0 tone 900 10",
+    "0 tone 900 10",
+    "0 log 1 repeats done"
+  ]
+}

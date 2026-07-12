@@ -1,0 +1,37 @@
+{
+  "name": "04_while_break",
+  "desc": "while(1) loop with change_var; break unwinds through two nested ifs out of the while, then execution continues after the loop.",
+  "tick_ms": 20,
+  "run_ms": 40,
+  "sensors": {},
+  "random": [],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "while_break",
+    "vars": [{ "name": "i", "init": 0 }],
+    "handlers": [
+      {
+        "event": { "type": "on_start" },
+        "body": [
+          { "op": "set_var", "name": "i", "value": 0 },
+          {
+            "op": "while",
+            "cond": 1,
+            "body": [
+              { "op": "change_var", "name": "i", "value": 1 },
+              {
+                "op": "if",
+                "cond": { "cmp": [{ "var": "i" }, ">=", 3] },
+                "body": [{ "op": "if", "cond": 1, "body": [{ "op": "break" }] }]
+              },
+              { "op": "tone", "hz": { "math": [{ "var": "i" }, "*", 100] }, "ms": 20 }
+            ]
+          },
+          { "op": "log", "msg": "loop done" }
+        ]
+      }
+    ]
+  },
+  "expected": ["0 tone 100 20", "0 tone 200 20", "0 log 1 loop done"]
+}

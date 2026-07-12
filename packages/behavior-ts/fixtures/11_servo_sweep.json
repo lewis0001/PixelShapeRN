@@ -1,0 +1,36 @@
+{
+  "name": "11_servo_sweep",
+  "desc": "servo_sweep 0->90 over 100 ms at 20 ms ticks: emits from(0) at start, interpolated 18/36/54/72, exact endpoint 90 at the deadline tick, then the following statements run in the same tick.",
+  "tick_ms": 20,
+  "run_ms": 200,
+  "sensors": {},
+  "random": [],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "servo_sweep",
+    "vars": [],
+    "handlers": [
+      {
+        "event": { "type": "on_start" },
+        "body": [
+          { "op": "servo", "id": "head", "deg": 10 },
+          { "op": "servo_sweep", "id": "head", "from": 0, "to": 90, "ms": 100 },
+          { "op": "tone", "hz": 600, "ms": 20 },
+          { "op": "log", "msg": "sweep done" }
+        ]
+      }
+    ]
+  },
+  "expected": [
+    "0 servo head 10",
+    "0 servo head 0",
+    "20 servo head 18",
+    "40 servo head 36",
+    "60 servo head 54",
+    "80 servo head 72",
+    "100 servo head 90",
+    "100 tone 600 20",
+    "100 log 1 sweep done"
+  ]
+}

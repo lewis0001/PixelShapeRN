@@ -1,0 +1,51 @@
+{
+  "name": "06_vars_math",
+  "desc": "set_var/change_var and the full expression grammar: math (/ * - min max), rand (scripted 440), cmp, logic and, not, call elapsed_ms + battery_pct. a=10/4=2.5 -> tone ms roundInt(2.5)=3; b=(2.5*2)+min(2.5,2)=7 -> drive l=70.",
+  "tick_ms": 20,
+  "run_ms": 120,
+  "sensors": { "battery.pct": [[0, 87]] },
+  "random": [440],
+  "buttons": [],
+  "program": {
+    "bsj": 1,
+    "name": "vars_math",
+    "vars": [
+      { "name": "a", "init": 0 },
+      { "name": "b", "init": 0 }
+    ],
+    "handlers": [
+      {
+        "event": { "type": "on_start" },
+        "body": [
+          { "op": "set_var", "name": "a", "value": { "math": [10, "/", 4] } },
+          {
+            "op": "set_var",
+            "name": "b",
+            "value": { "math": [{ "var": "a" }, "*", { "math": [3, "-", 1] }] }
+          },
+          { "op": "change_var", "name": "b", "value": { "math": [{ "var": "a" }, "min", 2] } },
+          {
+            "op": "drive",
+            "l": { "math": [{ "var": "b" }, "*", 10] },
+            "r": { "math": [{ "var": "a" }, "max", 30] }
+          },
+          { "op": "tone", "hz": { "rand": [400, 500] }, "ms": { "var": "a" } },
+          { "op": "wait", "ms": 100 },
+          {
+            "op": "if",
+            "cond": {
+              "logic": [
+                "and",
+                { "cmp": [{ "call": "elapsed_ms" }, ">=", 100] },
+                { "not": { "cmp": [{ "call": "battery_pct" }, "<", 50] } }
+              ]
+            },
+            "body": [{ "op": "log", "msg": "checks passed" }],
+            "else": [{ "op": "log", "msg": "checks FAILED" }]
+          }
+        ]
+      }
+    ]
+  },
+  "expected": ["0 drive 70 30", "0 tone 440 3", "100 log 1 checks passed"]
+}
