@@ -1,0 +1,37 @@
+{% include "_frontmatter.j2" %}
+
+Driving is fun; programming is better. {{ robot.name }} is programmed with
+**blocks** — snap together events, moves, sounds and lights in the
+[/builder](/builder/) page on the site, no code required. Behind the scenes
+each block program compiles to a tiny behavior file the robot runs entirely
+on its own — no phone or laptop needed once it's loaded.
+
+## Behaviors that ship with {{ robot.name }}
+
+{% if behaviors %}
+| Behavior | Name | Autostarts |
+| --- | --- | --- |
+{% for behavior in behaviors %}
+| `{{ behavior.id }}` | {{ behavior.name }} | {% if behavior.default %}yes{% else %}no{% endif %} |
+{% endfor %}
+
+The autostart behavior runs whenever the robot powers on. Open any of these in
+the builder to see how they work — remixing a shipped behavior is the fastest
+way to learn.
+{% else %}
+This robot ships without preloaded behaviors — a blank canvas. Open the
+[builder](/builder/) and make the first one yours.
+{% endif %}
+
+## Send a behavior to your robot
+
+1. Build (or remix) a behavior in the [/builder](/builder/).
+2. Try it in the built-in simulator — same blocks, zero risk of driving off a
+   table.
+3. Click **Send to robot**, pick your robot on the network, and it uploads in
+   a blink.
+4. Run it from the builder, or mark it **autostart** so it runs every time the
+   robot switches on.
+
+If the robot doesn't show up in the send dialog, check the
+[troubleshooting](./troubleshooting/) page.

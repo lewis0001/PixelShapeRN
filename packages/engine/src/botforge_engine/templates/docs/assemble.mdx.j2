@@ -1,0 +1,33 @@
+{% include "_frontmatter.j2" %}
+
+Build {{ robot.name }} one step at a time, LEGO style. New parts in each
+picture are shown in color; parts you already placed are ghosted grey.
+
+{% if not images_available %}
+:::note
+This page was generated before the step renders were available — the step
+images will appear after the next full build.
+:::
+
+{% endif %}
+{% for step in steps %}
+## Step {{ step.n }} — {{ step.title }}
+
+{% if step.image %}
+![Step {{ step.n }}: {{ step.title }}]({{ step.image }})
+
+{% endif %}
+{% if step.note %}
+{{ step.note }}
+
+{% endif %}
+{% if step.fasteners %}
+Fasteners for this step:
+
+{% for fastener in step.fasteners %}
+- {{ fastener }}
+{% endfor %}
+
+{% endif %}
+{% endfor %}
+That's the hardware done. Next stop: [flash the firmware](./flash/).

@@ -1,0 +1,33 @@
+{% include "_frontmatter.j2" %}
+
+Something's off? Find the module that's misbehaving below — each section lists
+the symptoms we see most and the fix that almost always works.
+
+{% for group in groups %}
+## {{ group.name }}
+
+{% for item in group.entries %}
+### {{ item.symptom }}
+
+{{ item.fix }}
+
+{% endfor %}
+{% endfor %}
+## General
+
+### Robot won't turn on
+
+Check the power switch is in the on position, then check the cell: charge it
+fully and make sure it is seated the right way around. If the robot runs on
+USB but not on battery, the cell (or its protection circuit) is the culprit.
+
+### Can't find the robot on the network
+
+Your robot and your phone/laptop must be on the **same Wi-Fi network**. If
+they are and it still doesn't appear, re-provision: hold **BOOT** for 5
+seconds to factory-reset Wi-Fi, then run the [first-run setup](./first-run/)
+again. On iOS, prefer the robot's IP address over the `.local` name.
+
+Still stuck? Take a photo of your wiring next to the
+[wiring diagram](./wiring/) — nine times out of ten the answer is in that
+comparison.

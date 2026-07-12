@@ -1,0 +1,40 @@
+{% include "_frontmatter.j2" %}
+
+Everything {{ robot.name }} needs, in three shopping lists: electronic modules,
+fasteners, and the parts you print yourself. Prices are estimates — modules
+like these are commodity parts, so feel free to shop around.
+
+## Electronics
+
+{% if electronics %}
+| Module | Qty | Price (USD, est.) | Where to buy |
+| --- | --- | --- | --- |
+{% for row in electronics %}
+| {{ row.name }} | {{ row.qty }} | {{ row.price }} | {% if row.url %}[BUY]({{ row.url }}){% else %}—{% endif %} |
+{% endfor %}
+{% else %}
+:::note
+This page was generated before the bill of materials was available. Re-run the
+build to fill in the electronics table with parts and buy links.
+:::
+{% endif %}
+
+## Fasteners
+
+{% if fasteners %}
+| Fastener | Spec | Qty |
+| --- | --- | --- |
+{% for row in fasteners %}
+| {{ row.name }} | {{ row.spec }} | {{ row.qty }} |
+{% endfor %}
+{% else %}
+No fasteners are required for this robot.
+{% endif %}
+
+Fasteners are cheapest in assortment packs — one pack covers many robots.
+
+## Printed parts
+
+The plastic parts are not bought — you print them (or have a print service or
+community member print them for you). See the [print guide](./print-guide/)
+for the full list of parts, materials and print settings.
