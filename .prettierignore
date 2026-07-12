@@ -9,6 +9,7 @@ dist/
 coverage/
 PLAN.md
 packages/engine/uv.lock
+packages/engine/tests/
 packages/firmware/
 *.min.*
 docs/reports/
