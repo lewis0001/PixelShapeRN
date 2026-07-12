@@ -48,7 +48,7 @@ def test_rover_card_with_upstream_artifacts(tmp_path: Path) -> None:
         "size_class": "palm",
         "est_build_minutes": 90,
         "hero_color": "#ff6b35",
-        "hero_image": "assembly/step-10.png",
+        "hero_image": "assembly/step-11.png",
         "est_cost_usd": 23.34,
         "print": {"grams": 73.0, "minutes": 280},
         "behaviors": ["avoid", "follow", "pet"],
@@ -62,7 +62,7 @@ def test_hero_image_uses_last_assembly_step_zero_padded(tmp_path: Path) -> None:
     _write_upstream(ctx)
     catalog.run(ctx)
     card = json.loads((ctx.dist_dir / "catalog.json").read_text(encoding="utf-8"))
-    assert card["hero_image"] == "assembly/step-10.png"
+    assert card["hero_image"] == "assembly/step-11.png"
 
     ctx_min = _ctx("_test-min", tmp_path)
     catalog.run(ctx_min)

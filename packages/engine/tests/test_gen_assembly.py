@@ -70,22 +70,22 @@ def test_rover_steps_and_wheel_instance_poses(tmp_path: Path) -> None:
 
     data = json.loads((out / "steps.json").read_text(encoding="utf-8"))
     assert data["robot_id"] == "rover-v1"
-    assert len(data["steps"]) == 10
+    assert len(data["steps"]) == 11
     assert [step["image"] for step in data["steps"]] == [
-        f"step-{i:02d}.png" for i in range(1, 11)
+        f"step-{i:02d}.png" for i in range(1, 12)
     ]
     # step 1 ("Print check") has empty adds but still renders the base state
     assert data["steps"][0]["adds"] == []
     assert data["steps"][0]["fasteners"] == []
-    # step 10 adds wheel@1/wheel@2 — pose lookup with the @n suffix must work
-    assert "wheel@1" in data["steps"][9]["adds"]
-    assert "wheel@2" in data["steps"][9]["adds"]
+    # step 11 adds wheel@1/wheel@2 — pose lookup with the @n suffix must work
+    assert "wheel@1" in data["steps"][10]["adds"]
+    assert "wheel@2" in data["steps"][10]["adds"]
     assert not [msg for msg in ctx.report if "has no pose" in msg], ctx.report
     assert not [msg for msg in ctx.report if "no STL" in msg], ctx.report
     assert not [msg for msg in ctx.report if "renders skipped" in msg], ctx.report
 
     pngs = sorted(path.name for path in out.glob("step-*.png"))
-    assert pngs == [f"step-{i:02d}.png" for i in range(1, 11)]
+    assert pngs == [f"step-{i:02d}.png" for i in range(1, 12)]
     for name in pngs:
         with Image.open(out / name) as img:
             assert img.size == (1600, 1200)

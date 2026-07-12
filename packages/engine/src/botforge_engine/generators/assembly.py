@@ -142,7 +142,17 @@ def _resolve_meshes(ctx: BuildContext) -> dict[str, Any]:
                     part_cache[base_id] = trimesh.creation.box(extents=FALLBACK_BOX_MM)
             meshes[key] = part_cache[base_id]
         elif key in module_by_id:
-            meshes[key] = trimesh.creation.box(extents=module_by_id[key].mech.dims_mm)
+            module = module_by_id[key]
+            mesh = trimesh.creation.box(extents=module.mech.dims_mm)
+            if module.sim is not None and module.sim.get("kind") == "motor_dc":
+                # Gearmotors get a visible output shaft along local +X so press-fit
+                # wheels read correctly in the step renders (nothing looks "missing").
+                shaft_len = 9.0
+                shaft = trimesh.creation.cylinder(radius=1.5, height=shaft_len, sections=16)
+                shaft.apply_transform(trimesh.transformations.rotation_matrix(np.pi / 2, [0, 1, 0]))
+                shaft.apply_translation([module.mech.dims_mm[0] / 2 + shaft_len / 2, 0, 0])
+                mesh = trimesh.util.concatenate([mesh, shaft])
+            meshes[key] = mesh
         elif base_id in fastener_refs:
             if "ball" in base_id:
                 meshes[key] = trimesh.creation.icosphere(subdivisions=2, radius=3.0)

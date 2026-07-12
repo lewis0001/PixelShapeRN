@@ -2,19 +2,19 @@ poses: # final pose of every part/module in chassis frame, mm + deg
   chassis: { xyz: [0, 0, 0], rpy: [0, 0, 0] }
   motor_left: { xyz: [-28, 30, 8], rpy: [0, 0, 90], explode: [0, 40, 0] }
   motor_right: { xyz: [-28, -30, 8], rpy: [0, 0, -90], explode: [0, -40, 0] }
-  wheel@1: { xyz: [-28, 44, 8], rpy: [90, 0, 0], explode: [0, 35, 0] }
-  wheel@2: { xyz: [-28, -44, 8], rpy: [-90, 0, 0], explode: [0, -35, 0] }
+  wheel@1: { xyz: [-28, 44, 8], rpy: [90, 0, 0], explode: [0, 26, 0] }
+  wheel@2: { xyz: [-28, -44, 8], rpy: [-90, 0, 0], explode: [0, -26, 0] }
   caster_mount: { xyz: [38, 0, 2], rpy: [0, 0, 0], explode: [0, 0, -25] }
   m3_ball_6mm: { xyz: [38, 0, 0], rpy: [0, 0, 0], explode: [0, 0, -35] } # TUNE
   mdrv: { xyz: [-38, 0, 6], rpy: [0, 0, 0], explode: [0, 0, 30] } # TUNE
   pwr: { xyz: [0, -22, 8], rpy: [0, 0, 0], explode: [0, 0, 35] } # TUNE
   sw: { xyz: [-20, -34, 10], rpy: [0, 0, 0], explode: [0, -25, 0] } # TUNE
   core: { xyz: [-10, 18, 8], rpy: [0, 0, 0], explode: [0, 0, 40] } # TUNE
-  range: { xyz: [42, 0, 20], rpy: [0, -10, 0], explode: [30, 0, 10] } # TUNE
+  range: { xyz: [42, 0, 20], rpy: [0, -10, 0], explode: [30, 0, 30] } # TUNE
   line: { xyz: [40, 0, 2], rpy: [0, 0, 0], explode: [0, 0, -20] } # TUNE
-  eyes: { xyz: [42, 0, 24], rpy: [0, -10, 0], explode: [30, 0, 15] } # TUNE
+  eyes: { xyz: [42, 0, 24], rpy: [0, -10, 0], explode: [30, 0, 48] } # TUNE
   buzz: { xyz: [32, 20, 6], rpy: [0, 0, 0], explode: [0, 0, 30] } # TUNE
-  head: { xyz: [40, 0, 18], rpy: [0, -10, 0], explode: [25, 0, 10] } # TUNE
+  head: { xyz: [40, 0, 18], rpy: [0, -10, 0], explode: [30, 0, 8] } # TUNE
   lid: { xyz: [0, 0, 26], rpy: [0, 0, 0], explode: [0, 0, 45] } # TUNE
 
 steps:
@@ -43,10 +43,28 @@ steps:
   - { id: 6, title: Power board + switch, adds: [pwr, sw] }
   - { id: 7, title: The brain, adds: [core], note: USB port faces the rear cutout. }
   - { id: 8, title: Wire it up, adds: [], note: Follow the wiring diagram page — colors match. }
-  - { id: 9, title: Sensors on the head, adds: [range, eyes, head] }
+  - {
+      id: 9,
+      title: Sensors into the head,
+      adds: [range, eyes, head],
+      fasteners: [m2x6_selftap x2],
+      note: Press the distance sensor into the pocket behind the face (window at the front),
+      then the LED stick into the eye holes above it — wires exit downward. The head then
+      screws onto the front platform.,
+    }
   - {
       id: 10,
-      title: Line sensors + lid,
-      adds: [line, buzz, lid, wheel@1, wheel@2],
+      title: Line sensors + beeper,
+      adds: [line, buzz],
+      note: The line board clips under the front lip with its sensors facing the floor. The
+        beeper drops into its pocket — a dab of glue or tape holds it if loose.,
+    }
+  - {
+      id: 11,
+      title: Wheels + lid,
+      adds: [wheel@1, wheel@2, lid],
       fasteners: [m2x6_selftap x2],
+      note: Push each wheel straight onto its motor's D-shaped shaft — a firm press,
+      no glue
+      or screws needed. Finish by screwing the lid to the rear bosses.,
     }
