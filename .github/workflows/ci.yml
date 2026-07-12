@@ -99,13 +99,49 @@ jobs:
           key: pio-${{ runner.os }}-${{ hashFiles('packages/firmware/platformio.ini') }}
       - name: Native VM tests
         run: pio test -d packages/firmware -e native
-      - name: Build esp32s3 firmware
-        run: pio run -d packages/firmware -e esp32s3
+      - name: Build esp32s3 firmware + LittleFS image
+        run: |
+          pio run -d packages/firmware -e esp32s3
+          pio run -d packages/firmware -e esp32s3 -t buildfs
+      - name: Merge flashable image + ESP Web Tools manifest
+        run: |
+          BUILD=packages/firmware/.pio/build/esp32s3
+          BOOT_APP0=$(find ~/.platformio -name boot_app0.bin | head -1)
+          python -m esptool --chip esp32s3 merge_bin -o "$BUILD/firmware-merged.bin" \
+            --flash_mode dio --flash_freq 80m --flash_size 8MB \
+            0x0 "$BUILD/bootloader.bin" \
+            0x8000 "$BUILD/partitions.bin" \
+            0xe000 "$BOOT_APP0" \
+            0x10000 "$BUILD/firmware.bin" \
+            0x610000 "$BUILD/littlefs.bin"
+          # Absolute asset URLs: releases/latest/download redirects, so relative
+          # manifest paths do not resolve (see docs/DECISIONS.md / flash page).
+          cat > "$BUILD/esp-web-tools-manifest.json" <<EOF
+          {
+            "name": "BOTFORGE universal firmware",
+            "version": "${GITHUB_REF_NAME}",
+            "new_install_prompt_erase": true,
+            "builds": [
+              {
+                "chipFamily": "ESP32-S3",
+                "parts": [
+                  {
+                    "path": "https://github.com/${GITHUB_REPOSITORY}/releases/latest/download/firmware-merged.bin",
+                    "offset": 0
+                  }
+                ]
+              }
+            ]
+          }
+          EOF
       - name: Upload firmware artifacts
         uses: actions/upload-artifact@v4
         with:
           name: firmware
-          path: packages/firmware/.pio/build/esp32s3/firmware.bin
+          path: |
+            packages/firmware/.pio/build/esp32s3/firmware.bin
+            packages/firmware/.pio/build/esp32s3/firmware-merged.bin
+            packages/firmware/.pio/build/esp32s3/esp-web-tools-manifest.json
 
   web-build:
     runs-on: ubuntu-latest
