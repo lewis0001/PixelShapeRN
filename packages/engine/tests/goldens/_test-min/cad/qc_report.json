@@ -1,0 +1,12 @@
+{
+  "plate": {
+    "bbox": [
+      60.0,
+      40.0,
+      3.0
+    ],
+    "overhang_pct": 0.0,
+    "volume_mm3": 7144.75,
+    "watertight": true
+  }
+}

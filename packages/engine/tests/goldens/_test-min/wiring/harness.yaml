@@ -1,0 +1,64 @@
+connectors:
+  core:
+    type: dupont_2_54
+    pinlabels:
+    - gpio38
+    - 5v
+    - gnd
+    - gpio16
+  eyes:
+    type: dupont_2_54
+    pinlabels:
+    - din
+    - vcc
+    - gnd
+  buzz:
+    type: dupont_2_54
+    pinlabels:
+    - sig
+    - gnd
+cables:
+  core__buzz:
+    wirecount: 2
+    colors:
+    - YE
+    - BK
+    wirelabels:
+    - core.gpio16→buzz.sig
+    - core.gnd→buzz.gnd
+    length: 30
+    length_unit: mm
+  core__eyes:
+    wirecount: 3
+    colors:
+    - GN
+    - RD
+    - BK
+    wirelabels:
+    - core.gpio38→eyes.din
+    - core.5v→eyes.vcc
+    - core.gnd→eyes.gnd
+    length: 40
+    length_unit: mm
+connections:
+- - core:
+    - gpio16
+    - gnd
+  - core__buzz:
+    - 1
+    - 2
+  - buzz:
+    - sig
+    - gnd
+- - core:
+    - gpio38
+    - 5v
+    - gnd
+  - core__eyes:
+    - 1
+    - 2
+    - 3
+  - eyes:
+    - din
+    - vcc
+    - gnd

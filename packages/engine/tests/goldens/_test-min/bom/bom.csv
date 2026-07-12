@@ -1,0 +1,6 @@
+section,ref,name,qty,unit_price_usd,line_total_usd,vendor,url
+electronics,core-esp32s3-devkit,ESP32-S3-DevKitC-1 dev board (N8R2),1,8.00,8.00,aliexpress,https://botforge.example/out/ali/core-esp32s3-devkit
+electronics,led-ws2812-2,2-pixel WS2812 LED eyes,1,0.50,0.50,aliexpress,https://botforge.example/out/ali/led-ws2812-2
+electronics,buzzer-passive,Passive piezo buzzer,1,0.30,0.30,aliexpress,https://botforge.example/out/ali/buzzer-passive
+fasteners,m2x6_selftap,M2×6 self-tapping screw,2,0.02,0.04,aliexpress,https://botforge.example/out/ali/m2x6_selftap
+printed,plate,plate,1,,,,

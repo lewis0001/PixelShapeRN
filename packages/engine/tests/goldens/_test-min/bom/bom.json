@@ -1,0 +1,108 @@
+{
+  "robot_id": "_test-min",
+  "robot_name": "Test Min",
+  "electronics": [
+    {
+      "ref": "core-esp32s3-devkit",
+      "name": "ESP32-S3-DevKitC-1 dev board (N8R2)",
+      "qty": 1,
+      "primary": {
+        "vendor": "aliexpress",
+        "label": "ESP32-S3-DevKitC-1 N8R2",
+        "price_usd": 8.0,
+        "url": "https://botforge.example/out/ali/core-esp32s3-devkit",
+        "vendor_url": "https://www.aliexpress.com/w/wholesale-esp32-s3-devkitc-1.html"
+      },
+      "alternates": [
+        {
+          "vendor": "amazon",
+          "label": "ESP32-S3 DevKitC-1",
+          "price_usd": 12.99,
+          "url": "https://botforge.example/out/amz/core-esp32s3-devkit",
+          "vendor_url": "https://www.amazon.com/s?k=esp32-s3+devkitc-1"
+        }
+      ],
+      "unit_price_usd": 8.0,
+      "line_total_usd": 8.0
+    },
+    {
+      "ref": "led-ws2812-2",
+      "name": "2-pixel WS2812 LED eyes",
+      "qty": 1,
+      "primary": {
+        "vendor": "aliexpress",
+        "label": "WS2812B 2-pixel stick",
+        "price_usd": 0.5,
+        "url": "https://botforge.example/out/ali/led-ws2812-2",
+        "vendor_url": "https://www.aliexpress.com/w/wholesale-ws2812b-module.html"
+      },
+      "alternates": [
+        {
+          "vendor": "amazon",
+          "label": "WS2812B breakouts (10-pack)",
+          "price_usd": 9.99,
+          "url": "https://botforge.example/out/amz/led-ws2812-2",
+          "vendor_url": "https://www.amazon.com/s?k=ws2812b+module"
+        }
+      ],
+      "unit_price_usd": 0.5,
+      "line_total_usd": 0.5
+    },
+    {
+      "ref": "buzzer-passive",
+      "name": "Passive piezo buzzer",
+      "qty": 1,
+      "primary": {
+        "vendor": "aliexpress",
+        "label": "12mm passive buzzer",
+        "price_usd": 0.3,
+        "url": "https://botforge.example/out/ali/buzzer-passive",
+        "vendor_url": "https://www.aliexpress.com/w/wholesale-passive-buzzer-12mm.html"
+      },
+      "alternates": [
+        {
+          "vendor": "amazon",
+          "label": "Passive buzzers (20-pack)",
+          "price_usd": 6.99,
+          "url": "https://botforge.example/out/amz/buzzer-passive",
+          "vendor_url": "https://www.amazon.com/s?k=passive+piezo+buzzer"
+        }
+      ],
+      "unit_price_usd": 0.3,
+      "line_total_usd": 0.3
+    }
+  ],
+  "fasteners": [
+    {
+      "ref": "m2x6_selftap",
+      "name": "M2\u00d76 self-tapping screw",
+      "qty": 2,
+      "primary": {
+        "vendor": "aliexpress",
+        "label": "M2x6 self-tapping screws (100 pcs)",
+        "price_usd": 0.02,
+        "url": "https://botforge.example/out/ali/m2x6_selftap",
+        "vendor_url": "https://www.aliexpress.com/w/wholesale-m2x6-self-tapping-screw.html"
+      },
+      "alternates": [],
+      "unit_price_usd": 0.02,
+      "line_total_usd": 0.04
+    }
+  ],
+  "printed": [
+    {
+      "ref": "plate",
+      "name": "plate",
+      "qty": 1,
+      "material": "PLA",
+      "color_role": "body",
+      "grams": null
+    }
+  ],
+  "totals": {
+    "electronics_usd": 8.8,
+    "fasteners_usd": 0.04,
+    "filament_g": null,
+    "estimated_total_usd": 8.84
+  }
+}

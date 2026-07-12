@@ -1,0 +1,21 @@
+{
+  "profile": "pla-0.20",
+  "estimated": true,
+  "parts": [
+    {
+      "part_id": "plate",
+      "qty": 1,
+      "grams": 12.5,
+      "minutes": 66,
+      "plate_hints": {
+        "orientation": "flat",
+        "material": "PLA",
+        "color_role": "body"
+      }
+    }
+  ],
+  "totals": {
+    "grams": 12.5,
+    "minutes": 66
+  }
+}

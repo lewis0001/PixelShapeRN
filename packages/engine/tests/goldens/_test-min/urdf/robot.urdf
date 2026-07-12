@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<robot name="_test-min">
+  <link name="plate">
+    <inertial>
+      <origin xyz="0 0 0.0015" rpy="0 0 0" />
+      <mass value="0.0088595" />
+      <inertia ixx="1.18791e-06" ixy="0" ixz="0" iyy="2.66449e-06" iyz="0" izz="3.83911e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/plate.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/plate.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="core">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.01" />
+      <inertia ixx="6.61875e-07" ixy="0" ixz="0" iyy="4.0875e-06" iyz="0" izz="4.50938e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/core.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/core.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="eyes">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/eyes.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/eyes.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="buzz">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.002" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/buzz.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/buzz.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="buzz_joint" type="fixed">
+    <parent link="plate" />
+    <child link="buzz" />
+    <origin xyz="-0.018 0 0.004" rpy="0 0 0" />
+  </joint>
+  <joint name="core_joint" type="fixed">
+    <parent link="plate" />
+    <child link="core" />
+    <origin xyz="0 0 0.004" rpy="0 0 0" />
+  </joint>
+  <joint name="eyes_joint" type="fixed">
+    <parent link="plate" />
+    <child link="eyes" />
+    <origin xyz="0.022 0 0.004" rpy="0 0 0" />
+  </joint>
+</robot>

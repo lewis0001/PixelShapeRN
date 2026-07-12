@@ -1,0 +1,6 @@
+from,to,color,length_mm,label
+core.gpio38,eyes.din,GN,40,core.gpio38→eyes.din
+core.5v,eyes.vcc,RD,40,core.5v→eyes.vcc
+core.gnd,eyes.gnd,BK,40,core.gnd→eyes.gnd
+core.gpio16,buzz.sig,YE,30,core.gpio16→buzz.sig
+core.gnd,buzz.gnd,BK,30,core.gnd→buzz.gnd

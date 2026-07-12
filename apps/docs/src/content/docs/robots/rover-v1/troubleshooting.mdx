@@ -1,0 +1,118 @@
+---
+title: "Troubleshooting"
+description: "Symptoms and fixes for every module in Rover."
+sidebar:
+  order: 10
+---
+
+Something's off? Find the module that's misbehaving below — each section lists
+the symptoms we see most and the fix that almost always works.
+
+## ESP32-S3-DevKitC-1 dev board (N8R2)
+
+### Computer doesn't see the board over USB
+
+Use a USB-C cable that carries data (many only charge), and plug into the port labelled USB, not UART.
+
+### Upload fails or times out
+
+Hold the BOOT button while plugging in the cable, then try the upload again.
+
+## 1S Li-ion power board (charger + 5V boost)
+
+### Robot won't turn on
+
+Check the 18650 is inserted with + facing the mark, the slide switch is on, and the cell has charge — plug in USB-C and look for the charging light.
+
+### Robot dies the moment the motors start
+
+The cell is nearly empty or worn out — charge it fully, or try a known-good branded protected cell.
+
+## DRV8833 dual motor driver
+
+### One wheel spins the wrong way
+
+Swap that motor's two wires at the driver, or flip its +/- in the builder's motor settings.
+
+### Motors twitch or robot reboots when driving
+
+Battery is low or wires too thin — charge the cell and check the 5V/GND wires are seated.
+
+## N20 metal-gear motor (6V 150RPM)
+
+### One wheel never spins
+
+Check both motor wires are firmly seated at the driver board and that the thin solder tabs on the motor haven't snapped off.
+
+### Motor whirrs but the wheel barely moves
+
+Push the wheel further onto the D-shaped shaft until it seats — it should not slip when you twist it by hand.
+
+## VL53L0X time-of-flight distance sensor
+
+### Distance always reads 0 or a huge number
+
+SDA and SCL are probably swapped — swap the blue and yellow wires at the brain.
+
+### Readings are jumpy or too short
+
+Peel the tiny protective film off the sensor window and keep wires out of its view.
+
+## 2-channel TCRT5000 line sensor
+
+### Robot ignores the line
+
+Keep the sensors 2-5 mm above the floor and use dark tape on a light surface — faint or glossy lines won't register.
+
+### Readings jump around
+
+Bright sunlight and halogen lamps blind infrared sensors — try a shadier spot.
+
+## 2-pixel WS2812 LED eyes
+
+### Eyes stay dark
+
+Data must enter at the pin marked DIN (the arrows point away from it) — if the wire is on DOUT, move it to the other end.
+
+### Colours look wrong
+
+Some boards use a different colour order — swap the red/green channel order in the builder's LED settings.
+
+## Passive piezo buzzer
+
+### No sound at all
+
+Check the + leg (the longer one, marked on top) goes to the yellow signal wire, and that yours is a PASSIVE buzzer — active ones only play one fixed tone.
+
+### Sound is very quiet
+
+Seat the buzzer fully in its pocket and make sure the small hole on top isn't covered.
+
+## SPDT slide switch
+
+### Switch does nothing
+
+Solder to the MIDDLE pin plus one outer pin — the two outer pins are never connected to each other.
+
+### Robot flickers when you touch the switch
+
+A solder joint is loose — reheat both joints until the solder flows shiny and smooth.
+
+## General
+
+### Robot won't turn on
+
+Check the power switch is in the on position, then check the cell: charge it
+fully and make sure it is seated the right way around. If the robot runs on
+USB but not on battery, the cell (or its protection circuit) is the culprit.
+
+### Can't find the robot on the network
+
+Your robot and your phone/laptop must be on the **same Wi-Fi network**. If
+they are and it still doesn't appear, re-provision: hold **BOOT** for 5
+seconds to factory-reset Wi-Fi, then run the [first-run setup](./first-run/)
+again. On iOS, prefer the robot's IP address over the `.local` name.
+
+Still stuck? Take a photo of your wiring next to the
+[wiring diagram](./wiring/) — nine times out of ten the answer is in that
+comparison.

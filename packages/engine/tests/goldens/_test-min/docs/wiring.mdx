@@ -1,0 +1,28 @@
+---
+title: "Wire it up"
+description: "The wiring diagram and wire list for Test Min."
+sidebar:
+  order: 5
+---
+
+Every connection in Test Min uses simple push-on jumper wires — no
+soldering iron required. Wire colors in the diagram match the colors in the
+wire list, so you can check your work at a glance.
+
+## Wiring diagram
+
+![Wiring diagram for Test Min](./images/wiring.svg)
+
+## Wire list
+
+| From | To | Color | Length (mm) |
+| --- | --- | --- | --- |
+| `core.gpio38` | `eyes.din` | GN | 40 |
+| `core.5v` | `eyes.vcc` | RD | 40 |
+| `core.gnd` | `eyes.gnd` | BK | 40 |
+| `core.gpio16` | `buzz.sig` | YE | 30 |
+| `core.gnd` | `buzz.gnd` | BK | 30 |
+
+Cut or buy jumper wires a little longer than listed — slack is easier to tuck
+away than a wire that is 5 mm too short. When everything matches the diagram,
+continue to [assembly](./assemble/).

@@ -1,0 +1,25 @@
+{
+  "bsj": 1,
+  "name": "blink",
+  "vars": [],
+  "handlers": [
+    {
+      "event": { "type": "on_start" },
+      "body": [
+        { "op": "led", "r": 0, "g": 120, "b": 40 },
+        { "op": "tone", "hz": 880, "ms": 100 },
+        { "op": "wait", "ms": 200 },
+        { "op": "led_off" }
+      ]
+    },
+    {
+      "event": { "type": "on_tick", "ms": 500 },
+      "body": [
+        { "op": "led", "r": 0, "g": 0, "b": 90 },
+        { "op": "wait", "ms": 250 },
+        { "op": "led_off" }
+      ]
+    },
+    { "event": { "type": "on_button" }, "body": [{ "op": "stop" }, { "op": "led_off" }] }
+  ]
+}

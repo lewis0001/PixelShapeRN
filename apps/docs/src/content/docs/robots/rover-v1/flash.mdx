@@ -1,0 +1,37 @@
+---
+title: "Flash the firmware"
+description: "Put the universal BOTFORGE firmware on Rover from your browser."
+sidebar:
+  order: 7
+---
+
+Rover runs the **universal BOTFORGE firmware**: one firmware image
+shared by every robot, told what it is by a small config file. The config —
+which motors, sensors and LEDs are on which pins — was generated from this
+robot's design, so there is nothing to program and nothing to edit. Flashing
+happens right in your browser; no toolchains, no drivers to hunt down.
+
+Use a Chromium-based browser (Chrome or Edge) on a laptop or desktop — browser
+flashing uses WebSerial, which phones and Safari don't support.
+
+## Step 1 — Plug in over USB
+
+Connect the robot's brain board to your computer with a **data-capable USB-C
+cable**. If the board offers two ports, use the one labelled **USB** (not
+UART). The power switch can stay off — the board runs from USB while flashing.
+
+## Step 2 — Hold BOOT
+
+Hold down the board's **BOOT** button, tap **RESET** (or re-plug the cable
+while still holding BOOT), then release. This puts the chip in download mode
+so the browser is allowed to write firmware to it.
+
+## Step 3 — Flash from the site
+
+Open the [/flash](/flash/) page on the site, pick **Rover**, and
+click **Flash**. Choose the board's serial port in the browser prompt and
+wait for the progress bar — about a minute. The robot reboots by itself when
+flashing finishes.
+
+That's it. The firmware and this robot's config are now on the board —
+continue to [first run](./first-run/) to get it on your Wi-Fi.

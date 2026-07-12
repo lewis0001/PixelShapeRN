@@ -68,6 +68,29 @@ everything cadlib uses) installs cleanly on Python 3.11/3.12 with prebuilt OCP
 wheels. The engine declares `cadquery>=2.4` in the optional `cad` extra and CI
 uses the resolved 2.8.x. No 2.4-only pinning reason exists.
 
+## 2026-07-12 — §5.5 config.json: real pin names and manifest ordering
+
+The frozen §5.5 example shows `line` pins as `"l"/"r"` and lists `pwr` last.
+The registry defines the line-sensor pins as `out_l`/`out_r`, and §5.5's own
+rule ("derived entirely from robot.yaml connections") means pin keys come from
+the registry pin names — the example's `l`/`r` shorthand loses information, so
+the real names win. Module order follows manifest order (deterministic,
+derivable), which places `pwr` first rather than last. Everything else in the
+example is reproduced byte-exactly and frozen in a test.
+
+## 2026-07-12 — Golden tests: full text for text artifacts, existence/QC for binaries
+
+Phase 1.15 asks for "hashes for binary files". STEP files embed export
+timestamps, PNG bytes depend on the GL rasterizer build, and SVG layout varies
+across graphviz releases — hashing any of them would make goldens fail on
+byte-noise, not regressions. Instead: every TEXT artifact (json/yaml/csv/
+md/mdx/urdf) is committed in full for `_test-min` and hash-snapshotted for
+`rover-v1`; binaries are checked for presence + non-zero size, with geometry
+regressions caught by the (text) `cad/qc_report.json` volumes/bboxes and the
+URDF masses. Print estimates in goldens use a committed deterministic fake
+slicer; the real-slicer 60–180 g sanity check runs where PrusaSlicer exists
+(the CI engine container).
+
 ## 2026-07-12 — ESLint: flat v9 at root, legacy v8 inside apps/web
 
 `next lint` on Next.js 14 requires eslint 8 + eslint-config-next. Rest of the

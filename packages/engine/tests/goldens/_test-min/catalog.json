@@ -1,0 +1,23 @@
+{
+  "id": "_test-min",
+  "name": "Test Min",
+  "tagline": "Minimal fixture robot for golden tests.",
+  "version": "1.0.0",
+  "difficulty": "beginner",
+  "size_class": "palm",
+  "est_build_minutes": 10,
+  "hero_color": "#4488ff",
+  "hero_image": "assembly/step-02.png",
+  "est_cost_usd": 8.84,
+  "print": {
+    "grams": 12.5,
+    "minutes": 66
+  },
+  "behaviors": [
+    "blink"
+  ],
+  "links": {
+    "docs": "/docs/robots/_test-min/",
+    "download": "/robots/_test-min#download"
+  }
+}

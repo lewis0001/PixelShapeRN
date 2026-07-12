@@ -134,6 +134,13 @@ def build(
     manifest_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     typer.echo(f"wrote {manifest_path}")
 
+    # §5.6: behaviors ship in the bundle verbatim (they are validated data, not generated).
+    behaviors_dir = dist_dir / "behaviors"
+    behaviors_dir.mkdir(parents=True, exist_ok=True)
+    for ref in resolved.behaviors:
+        src = bundle.robot_dir / ref.file
+        shutil.copyfile(src, behaviors_dir / Path(ref.file).name)
+
     ctx = BuildContext(
         resolved=resolved, robot_dir=bundle.robot_dir, dist_dir=dist_dir, registry=registry
     )
@@ -185,3 +192,7 @@ def clean(
 def app_main() -> None:
     """Console-script entry point that invokes the Typer app."""
     app()
+
+
+if __name__ == "__main__":
+    app_main()

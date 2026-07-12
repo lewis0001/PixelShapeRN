@@ -1,0 +1,28 @@
+{
+  "robot_id": "_test-min",
+  "steps": [
+    {
+      "id": 1,
+      "title": "Mount the brain",
+      "note": null,
+      "adds": [
+        "core"
+      ],
+      "fasteners": [
+        "m2x6_selftap x2"
+      ],
+      "image": "step-01.png"
+    },
+    {
+      "id": 2,
+      "title": "Eyes and beeper",
+      "note": "Press-fit both boards.",
+      "adds": [
+        "eyes",
+        "buzz"
+      ],
+      "fasteners": [],
+      "image": "step-02.png"
+    }
+  ]
+}

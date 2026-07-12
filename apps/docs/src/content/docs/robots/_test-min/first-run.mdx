@@ -1,0 +1,54 @@
+---
+title: "First run"
+description: "Get Test Min onto your Wi-Fi and take it for its first drive."
+sidebar:
+  order: 8
+---
+
+Time to wake Test Min up and get it onto your Wi-Fi. You only do this
+once — the robot remembers your network afterwards.
+
+## 1. Join the robot's setup hotspot
+
+Flip the power switch on. On first boot the robot opens its own Wi-Fi hotspot
+named `Botforge-XXXX` (the XXXX is unique to your robot). Join it from your
+phone or laptop — a **captive portal** setup page pops up automatically, like
+hotel Wi-Fi. If it doesn't appear, open a browser and go to any http page.
+
+## 2. Pick your Wi-Fi and name your robot
+
+In the portal, choose your home Wi-Fi network, enter its password, and give
+your robot a name. The name becomes its address on your network, so keep it
+simple — lowercase, no spaces. The portal also shows the robot's IP address
+and a QR code once it connects: **note the IP down**, it's handy later.
+
+## 3. Say hello
+
+Once the robot joins your network, open:
+
+```
+http://<name>.local
+```
+
+…replacing `<name>` with the name you chose.
+
+:::note[iPhone or iPad?]
+iOS is picky about `.local` (mDNS) addresses and sometimes refuses to resolve
+them. If the page won't load, use the **IP address shown in the setup portal**
+instead — e.g. `http://192.168.1.42`.
+:::
+
+## 4. Take it for a spin
+
+Head to the [/drive](/drive/) page on the site, connect to your robot, and
+drive it around with the on-screen joystick. Driving stops instantly when you
+let go — that's the built-in deadman safety.
+
+## Factory reset
+
+Robot moving to a new Wi-Fi network, or typo in the password? Hold the
+**BOOT** button for **5 seconds** while the robot is on. It forgets its Wi-Fi
+settings and returns to the `Botforge-XXXX` setup hotspot, ready for step 1
+again.
+
+All good? Go teach it some tricks on the [play page](./play/).
