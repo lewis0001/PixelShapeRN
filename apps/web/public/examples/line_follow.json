@@ -1,0 +1,81 @@
+{
+  "bsj": 1,
+  "name": "line_follow",
+  "vars": [
+    { "name": "lost", "init": 0 },
+    { "name": "th", "init": 2000 }
+  ],
+  "handlers": [
+    {
+      "event": { "type": "on_start" },
+      "body": [
+        { "op": "set_var", "name": "lost", "value": 0 },
+        { "op": "led", "r": 0, "g": 80, "b": 0 },
+        { "op": "tone", "hz": 1047, "ms": 100 },
+        { "op": "log", "msg": "line_follow: place me on the line" }
+      ]
+    },
+    {
+      "event": { "type": "on_tick", "ms": 40 },
+      "body": [
+        {
+          "op": "if",
+          "cond": { "cmp": [{ "var": "lost" }, ">=", 50] },
+          "body": [{ "op": "stop" }, { "op": "led", "r": 100, "g": 0, "b": 0 }],
+          "else": [
+            {
+              "op": "if",
+              "cond": {
+                "logic": [
+                  "and",
+                  { "cmp": [{ "sensor": "line.l" }, ">", { "var": "th" }] },
+                  { "cmp": [{ "sensor": "line.r" }, ">", { "var": "th" }] }
+                ]
+              },
+              "body": [
+                { "op": "set_var", "name": "lost", "value": 0 },
+                { "op": "led", "r": 0, "g": 80, "b": 0 },
+                { "op": "drive", "l": 45, "r": 45 }
+              ],
+              "else": [
+                {
+                  "op": "if",
+                  "cond": { "cmp": [{ "sensor": "line.l" }, ">", { "var": "th" }] },
+                  "body": [
+                    { "op": "set_var", "name": "lost", "value": 0 },
+                    { "op": "led", "r": 0, "g": 80, "b": 0 },
+                    { "op": "drive", "l": 20, "r": 65 }
+                  ],
+                  "else": [
+                    {
+                      "op": "if",
+                      "cond": { "cmp": [{ "sensor": "line.r" }, ">", { "var": "th" }] },
+                      "body": [
+                        { "op": "set_var", "name": "lost", "value": 0 },
+                        { "op": "led", "r": 0, "g": 80, "b": 0 },
+                        { "op": "drive", "l": 65, "r": 20 }
+                      ],
+                      "else": [
+                        { "op": "change_var", "name": "lost", "value": 1 },
+                        { "op": "led", "r": 100, "g": 60, "b": 0 },
+                        { "op": "drive", "l": 40, "r": 40 }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": { "type": "on_button" },
+      "body": [
+        { "op": "set_var", "name": "lost", "value": 0 },
+        { "op": "stop" },
+        { "op": "led_off" }
+      ]
+    }
+  ]
+}

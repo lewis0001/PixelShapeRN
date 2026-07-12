@@ -1,0 +1,40 @@
+{
+  "bsj": 1,
+  "name": "avoid_obstacles",
+  "vars": [],
+  "handlers": [
+    {
+      "event": { "type": "on_start" },
+      "body": [
+        { "op": "led", "r": 0, "g": 80, "b": 0 },
+        { "op": "tone", "hz": 880, "ms": 120 },
+        { "op": "wait", "ms": 150 },
+        { "op": "tone", "hz": 1320, "ms": 120 }
+      ]
+    },
+    {
+      "event": { "type": "on_tick", "ms": 60 },
+      "body": [
+        {
+          "op": "if",
+          "cond": { "cmp": [{ "sensor": "range.mm" }, "<", 140] },
+          "body": [
+            { "op": "led", "r": 120, "g": 20, "b": 0 },
+            { "op": "drive_time", "l": -60, "r": -60, "ms": 260 },
+            {
+              "op": "if",
+              "cond": { "cmp": [{ "rand": [0, 1] }, "==", 0] },
+              "body": [{ "op": "drive_time", "l": -70, "r": 70, "ms": 320 }],
+              "else": [{ "op": "drive_time", "l": 70, "r": -70, "ms": 320 }]
+            }
+          ],
+          "else": [
+            { "op": "led", "r": 0, "g": 80, "b": 0 },
+            { "op": "drive", "l": 70, "r": 70 }
+          ]
+        }
+      ]
+    },
+    { "event": { "type": "on_button" }, "body": [{ "op": "stop" }, { "op": "led_off" }] }
+  ]
+}

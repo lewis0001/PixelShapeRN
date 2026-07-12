@@ -9,6 +9,8 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@botforge/behavior-ts": "workspace:*",
+    "blockly": "^11.2.2",
     "esp-web-tools": "^10.2.1",
     "next": "^14.2.5",
     "react": "^18.3.1",
