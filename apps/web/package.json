@@ -10,16 +10,19 @@
   },
   "dependencies": {
     "@botforge/behavior-ts": "workspace:*",
+    "@botforge/sim": "workspace:*",
     "blockly": "^11.2.2",
     "esp-web-tools": "^10.2.1",
     "next": "^14.2.5",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.15",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.170.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.5",
