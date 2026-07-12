@@ -1,0 +1,26 @@
+# deps
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.pio/
+
+# build output
+dist/
+.next/
+.astro/
+.turbo/
+out/
+build/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+*.log
+coverage/
+playwright-report/
+test-results/

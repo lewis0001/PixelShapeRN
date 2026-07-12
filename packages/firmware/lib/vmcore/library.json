@@ -1,0 +1,8 @@
+{
+  "name": "vmcore",
+  "version": "0.1.0",
+  "description": "botforge VM core (Phase-0 placeholder: clamp helper). Grows into the robot VM in later phases.",
+  "license": "GPL-3.0-only",
+  "frameworks": "*",
+  "platforms": "*"
+}

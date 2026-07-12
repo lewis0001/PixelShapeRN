@@ -1,0 +1,11 @@
+# Name,   Type, SubType, Offset,   Size,     Flags
+# botforge Phase-0 partition table for 8MB flash (ESP32-S3-DevKitC-1 N8R2/N8R8).
+# Dual OTA app slots (~3MB each) + LittleFS data partition (1.5MB).
+# NOTE: LittleFS reuses the "spiffs" subtype — this is expected.
+nvs,      data, nvs,     0x9000,   0x5000,
+otadata,  data, ota,     0xE000,   0x2000,
+ota_0,    app,  ota_0,   0x10000,  0x300000,
+ota_1,    app,  ota_1,   0x310000, 0x300000,
+littlefs, data, spiffs,  0x610000, 0x180000,
+# 0x610000 + 0x180000 = 0x790000; remaining 0x70000 (448KB) up to 0x800000
+# is left unallocated as headroom for later phases (e.g. coredump partition).
