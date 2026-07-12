@@ -38,6 +38,36 @@ whose CLI emits the same `; filament used [g]` / estimated-time gcode comments
 the print-plan generator parses. The engine image installs it via apt. If a
 2.7+ feature is ever needed, revisit with a pinned AppImage mirror.
 
+## 2026-07-12 — §5.1 pin-type enum extended with `motor_out` and `switch`
+
+PLAN §5.1 fixes pin types to `gpio, pwm, adc, i2c_sda, i2c_scl, 5v, 3v3, gnd,
+vbat`, but the frozen §5.2 rover manifest wires endpoints that none of those
+types can describe: `mdrv.aout1..bout2 → motor_left/right.m1/m2` (H-bridge
+outputs to motor terminals) and `sw.a/b → pwr.out_switch_a/b` (mechanical
+switch inline on the boost rail). Two types are added: `motor_out` (driver
+output / motor terminal, legal only against another `motor_out`) and `switch`
+(switch terminal / switched-rail terminal, legal only against another
+`switch`). Migration note: no existing data predates this — the enum ships
+extended from the first registry commit. This is the minimal change that
+makes the frozen rover manifest validate.
+
+## 2026-07-12 — Core GPIO capability map lives in `firmware.params`
+
+§5.1's launch-module table says the core module "exposes gpio map" without
+specifying where. Rather than extend the frozen module schema, the core
+module's free-form `firmware.params` dict carries `available_gpios`,
+`adc1_gpios`, and `reserved_gpios`. The validator (required pins, ADC-only
+rule, double-booking, reserved pins) and the firmware-config generator read it
+from there. Core `pins:` lists only the power pins (5v/3v3/gnd); `gpioN`
+endpoint names are validated against `available_gpios`.
+
+## 2026-07-12 — CadQuery ≥2.4 resolves to 2.8.x
+
+PLAN §4.2 names CadQuery 2.4; the current release line (2.8.x, same API for
+everything cadlib uses) installs cleanly on Python 3.11/3.12 with prebuilt OCP
+wheels. The engine declares `cadquery>=2.4` in the optional `cad` extra and CI
+uses the resolved 2.8.x. No 2.4-only pinning reason exists.
+
 ## 2026-07-12 — ESLint: flat v9 at root, legacy v8 inside apps/web
 
 `next lint` on Next.js 14 requires eslint 8 + eslint-config-next. Rest of the
