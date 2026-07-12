@@ -91,6 +91,16 @@ URDF masses. Print estimates in goldens use a committed deterministic fake
 slicer; the real-slicer 60–180 g sanity check runs where PrusaSlicer exists
 (the CI engine container).
 
+## 2026-07-12 — companion-v1 added to the roadmap (owner request)
+
+Lewis requested a more complex flagship robot: rolls, follows its user, has AI
+chat, user-customisable abilities. Choices made: rolling form factor (not
+biped), app-first chat with onboard voice as a configurator upgrade, camera
+person-tracking for follow-me. Spec: docs/proposals/COMPANION-V1.md. It slots
+into Phase 6 as robot #3 (arm-v1 → BACKLOG) with the AI-chat platform work in
+Phase 7. Phase order and §5 contracts unchanged; new capability arrives as
+registry modules + firmware drivers, per the plan's own extension rules.
+
 ## 2026-07-12 — ESLint: flat v9 at root, legacy v8 inside apps/web
 
 `next lint` on Next.js 14 requires eslint 8 + eslint-config-next. Rest of the
