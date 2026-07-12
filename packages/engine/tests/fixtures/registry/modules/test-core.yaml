@@ -1,0 +1,33 @@
+id: test-core
+name: Test core MCU
+category: core
+electrical:
+  vcc: "5V"
+  logic_v: 3.3
+  current_ma: { typ: 50, max: 500 }
+  pins:
+    - { name: 5v, type: 5v, required: false }
+    - { name: 3v3, type: 3v3, required: false }
+    - { name: gnd, type: gnd, required: false }
+    - { name: vbat, type: vbat, required: false }
+firmware:
+  driver: CoreTest
+  params:
+    available_gpios: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 16, 38]
+    adc1_gpios: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    reserved_gpios: [0, 3, 19, 20, 43, 44, 45, 46]
+mech:
+  dims_mm: [50, 25, 8]
+  mass_g: 10
+  mount: { pattern: pcb_m2_2hole_15mm, screws: m2x6 }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { 5v: red, 3v3: orange, gnd: black }
+sourcing:
+  - { vendor: test, label: "Test core board", url: "https://example.com/core", price_usd: 8.0, affiliate_key: t }
+docs:
+  blurb: Fixture core module for engine tests.
+  datasheet_url: ""
+  troubleshooting: []
+sim:
+  kind: imu

@@ -1,0 +1,10 @@
+fasteners:
+  - id: m2x6
+    name: M2 x 6 self-tapping screw
+    spec: "M2 x 6 mm, pan head, self-tapping"
+    sourcing:
+      - { vendor: test, label: "M2 screw assortment", url: "https://example.com/m2", price_usd: 0.02, affiliate_key: t }
+  - id: ball-6mm
+    name: 6 mm steel ball
+    spec: "6 mm bearing ball, chrome steel"
+    sourcing: []

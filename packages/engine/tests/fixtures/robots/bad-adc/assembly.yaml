@@ -1,0 +1,16 @@
+poses:
+  body: { xyz: [0, 0, 0], rpy: [0, 0, 0] }
+  wheel@1: { xyz: [-20, 25, 8], rpy: [90, 0, 0], explode: [0, 30, 0] }
+  wheel@2: { xyz: [-20, -25, 8], rpy: [-90, 0, 0], explode: [0, -30, 0] }
+  core: { xyz: [10, 0, 6], rpy: [0, 0, 0], explode: [0, 0, 25] }
+  mdrv: { xyz: [-10, 0, 6], rpy: [0, 0, 0], explode: [0, 0, 20] }
+  motor: { xyz: [-20, 0, 8], rpy: [0, 0, 90], explode: [0, 20, 0] }
+  line: { xyz: [25, 0, 2], rpy: [0, 0, 0], explode: [0, 0, -15] }
+  tof: { xyz: [30, 0, 10], rpy: [0, 0, 0], explode: [15, 0, 0] }
+  sw: { xyz: [0, 20, 6], rpy: [0, 0, 0], explode: [0, 15, 0] }
+steps:
+  - { id: 1, title: Print check, adds: [], note: Confirm printed parts against the print guide. }
+  - { id: 2, title: The body, adds: [body] }
+  - { id: 3, title: Fit the motor, adds: [motor], fasteners: [m2x6 x2], note: Wires face inward. }
+  - { id: 4, title: Electronics, adds: [core, mdrv, line, tof, sw], fasteners: [m2x6 x2] }
+  - { id: 5, title: Wheels on, adds: [wheel@1, wheel@2] }

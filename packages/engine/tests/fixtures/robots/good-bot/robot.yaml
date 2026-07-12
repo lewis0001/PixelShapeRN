@@ -1,0 +1,54 @@
+schema_version: 1
+robot:
+  id: good-bot
+  name: Good Bot
+  tagline: A tiny fixture robot that exists only to be validated.
+  version: 1.0.0
+  size_class: palm
+  difficulty: beginner
+  est_build_minutes: 10
+  hero_color: "#00aa88"
+
+modules:
+  - { id: core, ref: test-core, label: Brain }
+  - { id: mdrv, ref: test-driver, label: Motor driver }
+  - { id: motor, ref: test-motor, label: Motor }
+  - { id: line, ref: test-line, label: Line sensor }
+  - { id: tof, ref: test-tof, label: Distance eye }
+  - { id: sw, ref: test-switch, label: Power switch }
+
+connections:
+  - { from: core.5v, to: mdrv.vcc, len_mm: 50 }
+  - { from: core.gnd, to: mdrv.gnd, len_mm: 50 }
+  - { from: core.gpio4, to: mdrv.in1, len_mm: 70 }
+  - { from: core.gpio5, to: mdrv.in2, len_mm: 70 }
+  - { from: mdrv.out1, to: motor.m1, len_mm: 55 }
+  - { from: mdrv.out2, to: motor.m2, len_mm: 55 }
+  - { from: core.gpio1, to: line.out, len_mm: 90 }
+  - { from: core.3v3, to: line.vcc, len_mm: 90 }
+  - { from: core.gnd, to: line.gnd, len_mm: 90 }
+  - { from: core.gpio8, to: tof.sda, len_mm: 80 }
+  - { from: core.gpio9, to: tof.scl, len_mm: 80 }
+  - { from: core.3v3, to: tof.vcc, len_mm: 80 }
+  - { from: core.gnd, to: tof.gnd, len_mm: 80, note: shared ground }
+
+printed_parts:
+  - { id: body, script: dummy.py, params: { l: 60, w: 40 }, qty: 1, material: PLA, color_role: body }
+  - { id: wheel, script: dummy.py, params: { d: 30 }, qty: 2, material: PLA, color_role: accent }
+
+fasteners:
+  - { ref: m2x6, qty: 4 }
+
+assembly: assembly.yaml
+
+behaviors:
+  - { id: blink, file: behaviors/blink.json, default: true }
+
+firmware:
+  autostart_behavior: blink
+
+sim:
+  drive: diff
+  wheel_radius_mm: 15
+  track_mm: 60
+  arena_default: obstacle_pen

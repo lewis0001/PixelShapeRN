@@ -1,0 +1,27 @@
+id: test-line
+name: Test line sensor
+category: sensor
+electrical:
+  vcc: "3.3V"
+  logic_v: 3.3
+  current_ma: { typ: 10, max: 20 }
+  pins:
+    - { name: vcc, type: 3v3, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: out, type: adc, required: true }
+firmware:
+  driver: Line_Test
+  params: {}
+mech:
+  dims_mm: [15, 10, 3]
+  mass_g: 1
+  mount: { pattern: pcb_m2_2hole_15mm, screws: m2x6 }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { vcc: red, gnd: black, out: white }
+sourcing:
+  - { vendor: test, label: "Test line sensor", url: "https://example.com/line", price_usd: 1.0, affiliate_key: t }
+docs:
+  blurb: Fixture analog line sensor.
+sim:
+  kind: line_ir

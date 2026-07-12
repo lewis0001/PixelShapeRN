@@ -1,0 +1,33 @@
+id: test-driver
+name: Test dual motor driver
+category: actuator
+electrical:
+  vcc: "2.7-10.8V"
+  logic_v: 3.3
+  current_ma: { typ: 200, max: 600 }
+  pins:
+    - { name: vcc, type: 5v, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: in1, type: pwm, required: true }
+    - { name: in2, type: pwm, required: true }
+    - { name: out1, type: motor_out, required: true }
+    - { name: out2, type: motor_out, required: true }
+firmware:
+  driver: Motor_Test
+  params: { pwm_hz: 20000 }
+mech:
+  dims_mm: [20, 15, 3]
+  mass_g: 2
+  mount: { pattern: pcb_m2_2hole_15mm, screws: m2x6 }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { vcc: red, gnd: black, in1: yellow, in2: orange, out1: green, out2: blue }
+sourcing:
+  - { vendor: test, label: "Test driver", url: "https://example.com/driver", price_usd: 1.5, affiliate_key: t }
+docs:
+  blurb: Fixture motor driver.
+  datasheet_url: "https://example.com/driver.pdf"
+  troubleshooting:
+    - { symptom: "Motor stalls", fix: "Check the battery." }
+sim:
+  kind: motor_dc

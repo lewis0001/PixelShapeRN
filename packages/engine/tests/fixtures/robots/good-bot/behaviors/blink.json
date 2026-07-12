@@ -1,0 +1,11 @@
+{
+  "bsj": 1,
+  "name": "blink",
+  "vars": [],
+  "handlers": [
+    {
+      "event": { "type": "on_tick", "ms": 500 },
+      "body": [{ "op": "led", "r": 0, "g": 128, "b": 0 }]
+    }
+  ]
+}

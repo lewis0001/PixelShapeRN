@@ -1,0 +1,24 @@
+# A bare motor: no firmware block — it is driven through test-driver.
+id: test-motor
+name: Test gear motor
+category: actuator
+electrical:
+  vcc: "6V"
+  logic_v: 3.3
+  current_ma: { typ: 150, max: 300 }
+  pins:
+    - { name: m1, type: motor_out, required: true }
+    - { name: m2, type: motor_out, required: true }
+mech:
+  dims_mm: [24, 10, 12]
+  mass_g: 9
+  mount: { pattern: clamp_n20, screws: m2x6 }
+wiring:
+  connector: solder_tab
+  wire_colors: { m1: red, m2: black }
+sourcing:
+  - { vendor: test, label: "Test motor", url: "https://example.com/motor", price_usd: 3.0, affiliate_key: t }
+docs:
+  blurb: Fixture gear motor (no firmware driver of its own).
+sim:
+  kind: motor_dc

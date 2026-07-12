@@ -1,0 +1,28 @@
+id: test-tof
+name: Test distance sensor
+category: sensor
+electrical:
+  vcc: "3.3V"
+  logic_v: 3.3
+  current_ma: { typ: 20, max: 40 }
+  pins:
+    - { name: vcc, type: 3v3, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: sda, type: i2c_sda, required: true }
+    - { name: scl, type: i2c_scl, required: true }
+firmware:
+  driver: Range_Test
+  params: { max_mm: 2000 }
+mech:
+  dims_mm: [13, 18, 2]
+  mass_g: 1
+  mount: { pattern: pcb_m2_2hole_15mm, screws: m2x6 }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { vcc: red, gnd: black, sda: blue, scl: yellow }
+sourcing:
+  - { vendor: test, label: "Test ToF sensor", url: "https://example.com/tof", price_usd: 2.5, affiliate_key: t }
+docs:
+  blurb: Fixture I2C time-of-flight sensor.
+sim:
+  kind: tof_raycast

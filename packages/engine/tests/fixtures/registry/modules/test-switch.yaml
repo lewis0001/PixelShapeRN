@@ -1,0 +1,22 @@
+# A passive slide switch: no firmware block.
+id: test-switch
+name: Test slide switch
+category: passive
+electrical:
+  vcc: "n/a"
+  logic_v: 3.3
+  current_ma: { typ: 0, max: 0 }
+  pins:
+    - { name: a, type: switch, required: false }
+    - { name: b, type: switch, required: false }
+mech:
+  dims_mm: [12, 6, 5]
+  mass_g: 1
+  mount: { pattern: snapless_lip, screws: m2x6 }
+wiring:
+  connector: solder_tab
+  wire_colors: { a: red, b: red }
+sourcing:
+  - { vendor: test, label: "Test switch", url: "https://example.com/switch", price_usd: 0.2, affiliate_key: t }
+docs:
+  blurb: Fixture passive power switch.
