@@ -1,0 +1,45 @@
+fasteners:
+  - id: m2x6_selftap
+    name: M2×6 self-tapping screw
+    spec: "M2 x 6 mm pan head, self-tapping, for printed plastic"
+    sourcing:
+      - {
+          vendor: aliexpress,
+          label: "M2x6 self-tapping screws (100 pcs)",
+          url: "https://www.aliexpress.com/w/wholesale-m2x6-self-tapping-screw.html",
+          price_usd: 0.02,
+          affiliate_key: ali,
+        }
+  - id: m2x8_selftap
+    name: M2×8 self-tapping screw
+    spec: "M2 x 8 mm pan head, self-tapping, for printed plastic"
+    sourcing:
+      - {
+          vendor: aliexpress,
+          label: "M2x8 self-tapping screws (100 pcs)",
+          url: "https://www.aliexpress.com/w/wholesale-m2x8-self-tapping-screw.html",
+          price_usd: 0.02,
+          affiliate_key: ali,
+        }
+  - id: m2_heatinsert_optional
+    name: M2 heat-set insert (optional upgrade)
+    spec: "M2 brass heat-set insert, 3.2 mm OD x 3 mm — optional upgrade over self-tapping screws for parts you expect to reopen often"
+    sourcing:
+      - {
+          vendor: aliexpress,
+          label: "M2 heat-set inserts (50 pcs)",
+          url: "https://www.aliexpress.com/w/wholesale-m2-heat-set-insert.html",
+          price_usd: 0.05,
+          affiliate_key: ali,
+        }
+  - id: m3_ball_6mm
+    name: 6 mm steel ball for caster
+    spec: "6 mm chrome steel bearing ball (G25)"
+    sourcing:
+      - {
+          vendor: aliexpress,
+          label: "6mm steel bearing balls (50 pcs)",
+          url: "https://www.aliexpress.com/w/wholesale-6mm-steel-ball.html",
+          price_usd: 0.10,
+          affiliate_key: ali,
+        }

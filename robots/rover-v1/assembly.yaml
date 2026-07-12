@@ -1,0 +1,52 @@
+poses: # final pose of every part/module in chassis frame, mm + deg
+  chassis: { xyz: [0, 0, 0], rpy: [0, 0, 0] }
+  motor_left: { xyz: [-28, 30, 8], rpy: [0, 0, 90], explode: [0, 40, 0] }
+  motor_right: { xyz: [-28, -30, 8], rpy: [0, 0, -90], explode: [0, -40, 0] }
+  wheel@1: { xyz: [-28, 44, 8], rpy: [90, 0, 0], explode: [0, 35, 0] }
+  wheel@2: { xyz: [-28, -44, 8], rpy: [-90, 0, 0], explode: [0, -35, 0] }
+  caster_mount: { xyz: [38, 0, 2], rpy: [0, 0, 0], explode: [0, 0, -25] }
+  m3_ball_6mm: { xyz: [38, 0, 0], rpy: [0, 0, 0], explode: [0, 0, -35] } # TUNE
+  mdrv: { xyz: [-38, 0, 6], rpy: [0, 0, 0], explode: [0, 0, 30] } # TUNE
+  pwr: { xyz: [0, -22, 8], rpy: [0, 0, 0], explode: [0, 0, 35] } # TUNE
+  sw: { xyz: [-20, -34, 10], rpy: [0, 0, 0], explode: [0, -25, 0] } # TUNE
+  core: { xyz: [-10, 18, 8], rpy: [0, 0, 0], explode: [0, 0, 40] } # TUNE
+  range: { xyz: [42, 0, 20], rpy: [0, -10, 0], explode: [30, 0, 10] } # TUNE
+  line: { xyz: [40, 0, 2], rpy: [0, 0, 0], explode: [0, 0, -20] } # TUNE
+  eyes: { xyz: [42, 0, 24], rpy: [0, -10, 0], explode: [30, 0, 15] } # TUNE
+  buzz: { xyz: [32, 20, 6], rpy: [0, 0, 0], explode: [0, 0, 30] } # TUNE
+  head: { xyz: [40, 0, 18], rpy: [0, -10, 0], explode: [25, 0, 10] } # TUNE
+  lid: { xyz: [0, 0, 26], rpy: [0, 0, 0], explode: [0, 0, 45] } # TUNE
+
+steps:
+  - {
+      id: 1,
+      title: Print check,
+      adds: [],
+      note: Confirm all printed parts against the print guide.,
+    }
+  - {
+      id: 2,
+      title: Fit the left motor,
+      adds: [motor_left],
+      fasteners: [m2x8_selftap x2],
+      note: Wires face inward.,
+    }
+  - {
+      id: 3,
+      title: Fit the right motor,
+      adds: [motor_right],
+      fasteners: [m2x8_selftap x2],
+      note: Mirror of step 2.,
+    }
+  - { id: 4, title: Caster ball, adds: [caster_mount, m3_ball_6mm], fasteners: [m2x6_selftap x2] }
+  - { id: 5, title: Motor driver, adds: [mdrv], fasteners: [m2x6_selftap x2] }
+  - { id: 6, title: Power board + switch, adds: [pwr, sw] }
+  - { id: 7, title: The brain, adds: [core], note: USB port faces the rear cutout. }
+  - { id: 8, title: Wire it up, adds: [], note: Follow the wiring diagram page — colors match. }
+  - { id: 9, title: Sensors on the head, adds: [range, eyes, head] }
+  - {
+      id: 10,
+      title: Line sensors + lid,
+      adds: [line, buzz, lid, wheel@1, wheel@2],
+      fasteners: [m2x6_selftap x2],
+    }

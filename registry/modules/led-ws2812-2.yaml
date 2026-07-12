@@ -1,0 +1,50 @@
+id: led-ws2812-2
+name: 2-pixel WS2812 LED eyes
+category: output
+electrical:
+  vcc: "4-7V"
+  logic_v: 3.3
+  current_ma: { typ: 10, max: 120 }
+  pins:
+    - { name: vcc, type: 5v, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: din, type: gpio, required: true }
+firmware:
+  driver: Pixel_WS2812
+  params: { count: 2 }
+mech:
+  dims_mm: [10, 10, 3]
+  mass_g: 1
+  mount: { pattern: pcb_glue_pad, screws: "none" }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { vcc: red, gnd: black, din: green }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "WS2812B 2-pixel stick",
+      url: "https://www.aliexpress.com/w/wholesale-ws2812b-module.html",
+      price_usd: 0.50,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "WS2812B breakouts (10-pack)",
+      url: "https://www.amazon.com/s?k=ws2812b+module",
+      price_usd: 9.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: Two glowing RGB eyes on one tiny board — any colour, driven by a single wire.
+  datasheet_url: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+  troubleshooting:
+    - {
+        symptom: "Eyes stay dark",
+        fix: "Data must enter at the pin marked DIN (the arrows point away from it) — if the wire is on DOUT, move it to the other end.",
+      }
+    - {
+        symptom: "Colours look wrong",
+        fix: "Some boards use a different colour order — swap the red/green channel order in the builder's LED settings.",
+      }
+sim:
+  kind: led

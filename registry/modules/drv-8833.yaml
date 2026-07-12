@@ -1,0 +1,59 @@
+id: drv-8833
+name: DRV8833 dual motor driver
+category: actuator
+electrical:
+  vcc: "2.7-10.8V"
+  logic_v: 3.3
+  current_ma: { typ: 400, max: 1500 }
+  pins:
+    - { name: vcc, type: 5v, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: ain1, type: pwm, required: true }
+    - { name: ain2, type: pwm, required: true }
+    - { name: bin1, type: pwm, required: true }
+    - { name: bin2, type: pwm, required: true }
+    - { name: slp, type: gpio, required: false }
+    - { name: aout1, type: motor_out, required: false }
+    - { name: aout2, type: motor_out, required: false }
+    - { name: bout1, type: motor_out, required: false }
+    - { name: bout2, type: motor_out, required: false }
+firmware:
+  driver: Motor_DRV8833
+  params: { pwm_hz: 20000, slew_per_s: 400 }
+mech:
+  dims_mm: [20, 15, 3]
+  mass_g: 2
+  mount: { pattern: pcb_m2_2hole_15mm, screws: m2x6_selftap }
+wiring:
+  connector: dupont_2_54
+  wire_colors:
+    { vcc: red, gnd: black, ain1: yellow, ain2: orange, bin1: green, bin2: blue, slp: white }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "DRV8833 module",
+      url: "https://www.aliexpress.com/w/wholesale-drv8833.html",
+      price_usd: 1.50,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "DRV8833 (3-pack)",
+      url: "https://www.amazon.com/s?k=drv8833",
+      price_usd: 7.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: Drives both wheel motors. Tiny H-bridge chip on a breakout board.
+  datasheet_url: https://www.ti.com/lit/ds/symlink/drv8833.pdf
+  troubleshooting:
+    - {
+        symptom: "One wheel spins the wrong way",
+        fix: "Swap that motor's two wires at the driver, or flip its +/- in the builder's motor settings.",
+      }
+    - {
+        symptom: "Motors twitch or robot reboots when driving",
+        fix: "Battery is low or wires too thin — charge the cell and check the 5V/GND wires are seated.",
+      }
+sim:
+  kind: motor_dc

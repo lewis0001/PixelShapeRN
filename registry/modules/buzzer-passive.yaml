@@ -1,0 +1,49 @@
+id: buzzer-passive
+name: Passive piezo buzzer
+category: output
+electrical:
+  vcc: "3-5V"
+  logic_v: 3.3
+  current_ma: { typ: 5, max: 30 }
+  pins:
+    - { name: sig, type: pwm, required: true }
+    - { name: gnd, type: gnd, required: true }
+firmware:
+  driver: Buzzer_PWM
+  params: {}
+mech:
+  dims_mm: [12, 12, 9]
+  mass_g: 2
+  mount: { pattern: pocket_buzzer_12mm, screws: "none" }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { sig: yellow, gnd: black }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "12mm passive buzzer",
+      url: "https://www.aliexpress.com/w/wholesale-passive-buzzer-12mm.html",
+      price_usd: 0.30,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "Passive buzzers (20-pack)",
+      url: "https://www.amazon.com/s?k=passive+piezo+buzzer",
+      price_usd: 6.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: The robot's voice — beeps, chirps and little tunes. Passive type, so the brain wiggles the pin to play each note.
+  datasheet_url: ""
+  troubleshooting:
+    - {
+        symptom: "No sound at all",
+        fix: "Check the + leg (the longer one, marked on top) goes to the yellow signal wire, and that yours is a PASSIVE buzzer — active ones only play one fixed tone.",
+      }
+    - {
+        symptom: "Sound is very quiet",
+        fix: "Seat the buzzer fully in its pocket and make sure the small hole on top isn't covered.",
+      }
+sim:
+  kind: buzzer

@@ -1,0 +1,107 @@
+schema_version: 1
+robot:
+  id: rover-v1
+  name: Rover
+  tagline: A palm-sized explorer that dodges obstacles and follows lines.
+  version: 1.0.0
+  size_class: palm
+  difficulty: beginner
+  est_build_minutes: 90
+  hero_color: "#ff6b35"
+
+modules:
+  - { id: core, ref: core-esp32s3-devkit, label: Brain }
+  - { id: pwr, ref: pwr-1s-boost, label: Power }
+  - { id: mdrv, ref: drv-8833, label: Motor driver }
+  - { id: motor_left, ref: motor-n20, label: Left motor }
+  - { id: motor_right, ref: motor-n20, label: Right motor }
+  - { id: range, ref: sens-vl53l0x, label: Distance eye }
+  - { id: line, ref: sens-line-2ch, label: Line sensors }
+  - { id: eyes, ref: led-ws2812-2, label: LED eyes }
+  - { id: buzz, ref: buzzer-passive, label: Beeper }
+  - { id: sw, ref: sw-slide, label: Power switch }
+
+connections:
+  # power tree
+  - { from: pwr.5v, to: core.5v, len_mm: 60 }
+  - { from: pwr.gnd, to: core.gnd, len_mm: 60 }
+  - { from: pwr.5v, to: mdrv.vcc, len_mm: 50 }
+  - { from: pwr.gnd, to: mdrv.gnd, len_mm: 50 }
+  - { from: sw.a, to: pwr.out_switch_a, len_mm: 40, note: switch inline on boost output }
+  - { from: sw.b, to: pwr.out_switch_b, len_mm: 40 }
+  # motor driver signals
+  - { from: core.gpio4, to: mdrv.ain1, len_mm: 70 }
+  - { from: core.gpio5, to: mdrv.ain2, len_mm: 70 }
+  - { from: core.gpio6, to: mdrv.bin1, len_mm: 70 }
+  - { from: core.gpio7, to: mdrv.bin2, len_mm: 70 }
+  - { from: core.gpio15, to: mdrv.slp, len_mm: 70 }
+  # motors
+  - { from: mdrv.aout1, to: motor_left.m1, len_mm: 55 }
+  - { from: mdrv.aout2, to: motor_left.m2, len_mm: 55 }
+  - { from: mdrv.bout1, to: motor_right.m1, len_mm: 55 }
+  - { from: mdrv.bout2, to: motor_right.m2, len_mm: 55 }
+  # ToF (I2C)
+  - { from: core.gpio8, to: range.sda, len_mm: 80 }
+  - { from: core.gpio9, to: range.scl, len_mm: 80 }
+  - { from: core.3v3, to: range.vcc, len_mm: 80 }
+  - { from: core.gnd, to: range.gnd, len_mm: 80 }
+  # line sensors (ADC1 pins)
+  - { from: core.gpio1, to: line.out_l, len_mm: 90 }
+  - { from: core.gpio2, to: line.out_r, len_mm: 90 }
+  - { from: core.3v3, to: line.vcc, len_mm: 90 }
+  - { from: core.gnd, to: line.gnd, len_mm: 90 }
+  # eyes + buzzer
+  - { from: core.gpio38, to: eyes.din, len_mm: 100 }
+  - { from: core.5v, to: eyes.vcc, len_mm: 100 }
+  - { from: core.gnd, to: eyes.gnd, len_mm: 100 }
+  - { from: core.gpio16, to: buzz.sig, len_mm: 60 }
+  - { from: core.gnd, to: buzz.gnd, len_mm: 60 }
+
+printed_parts:
+  - {
+      id: chassis,
+      script: chassis.py,
+      params: { l: 96, w: 74, wall: 2.0 },
+      qty: 1,
+      material: PLA,
+      color_role: body,
+    }
+  - {
+      id: wheel,
+      script: wheel.py,
+      params: { d: 42, tire_grooves: 8 },
+      qty: 2,
+      material: PLA,
+      color_role: accent,
+    }
+  - {
+      id: caster_mount,
+      script: caster.py,
+      params: { ball_d: 6.2 },
+      qty: 1,
+      material: PLA,
+      color_role: body,
+    }
+  - { id: head, script: head.py, params: {}, qty: 1, material: PLA, color_role: accent }
+  - { id: lid, script: lid.py, params: {}, qty: 1, material: PLA, color_role: body }
+
+fasteners:
+  - { ref: m2x6_selftap, qty: 8 }
+  - { ref: m2x8_selftap, qty: 4 }
+  - { ref: m3_ball_6mm, qty: 1 }
+
+assembly: assembly.yaml
+
+behaviors:
+  - { id: avoid, file: behaviors/avoid_obstacles.json, default: true }
+  - { id: follow, file: behaviors/line_follow.json }
+  - { id: pet, file: behaviors/pet_mode.json }
+
+firmware:
+  autostart_behavior: avoid
+
+sim:
+  drive: diff
+  wheel_radius_mm: 21
+  track_mm: 82
+  arena_default: obstacle_pen

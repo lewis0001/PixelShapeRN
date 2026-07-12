@@ -1,0 +1,51 @@
+id: sens-line-2ch
+name: 2-channel TCRT5000 line sensor
+category: sensor
+electrical:
+  vcc: "3.3-5V"
+  logic_v: 3.3
+  current_ma: { typ: 10, max: 40 }
+  pins:
+    - { name: vcc, type: 3v3, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: out_l, type: adc, required: true }
+    - { name: out_r, type: adc, required: true }
+firmware:
+  driver: Line_TCRT
+  params: {}
+mech:
+  dims_mm: [40, 10, 5]
+  mass_g: 3
+  mount: { pattern: pcb_m2_2hole_30mm, screws: m2x6_selftap }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { vcc: red, gnd: black, out_l: blue, out_r: green }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "TCRT5000 2-channel line sensor",
+      url: "https://www.aliexpress.com/w/wholesale-tcrt5000-line-sensor.html",
+      price_usd: 1.50,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "TCRT5000 modules (5-pack)",
+      url: "https://www.amazon.com/s?k=tcrt5000+line+sensor",
+      price_usd: 7.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: Two infrared eyes under the nose that spot dark lines on light floors. Higher readings mean a darker surface.
+  datasheet_url: https://www.vishay.com/docs/83760/tcrt5000.pdf
+  troubleshooting:
+    - {
+        symptom: "Robot ignores the line",
+        fix: "Keep the sensors 2-5 mm above the floor and use dark tape on a light surface — faint or glossy lines won't register.",
+      }
+    - {
+        symptom: "Readings jump around",
+        fix: "Bright sunlight and halogen lamps blind infrared sensors — try a shadier spot.",
+      }
+sim:
+  kind: line_ir

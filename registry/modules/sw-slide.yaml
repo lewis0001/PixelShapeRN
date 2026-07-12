@@ -1,0 +1,44 @@
+id: sw-slide
+name: SPDT slide switch
+category: passive
+electrical:
+  vcc: "-"
+  logic_v: 0
+  current_ma: { typ: 0, max: 0 }
+  pins:
+    - { name: a, type: switch, required: true }
+    - { name: b, type: switch, required: true }
+mech:
+  dims_mm: [19, 6, 6]
+  mass_g: 1
+  mount: { pattern: pocket_slide_switch, screws: "none" }
+wiring:
+  connector: solder_tab
+  wire_colors: { a: red, b: red }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "SS12D00 slide switch",
+      url: "https://www.aliexpress.com/w/wholesale-ss12d00-slide-switch.html",
+      price_usd: 0.20,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "Slide switches (30-pack)",
+      url: "https://www.amazon.com/s?k=spdt+slide+switch",
+      price_usd: 5.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: The on/off switch. It sits in the power wire and simply breaks the circuit when slid off.
+  datasheet_url: ""
+  troubleshooting:
+    - {
+        symptom: "Switch does nothing",
+        fix: "Solder to the MIDDLE pin plus one outer pin — the two outer pins are never connected to each other.",
+      }
+    - {
+        symptom: "Robot flickers when you touch the switch",
+        fix: "A solder joint is loose — reheat both joints until the solder flows shiny and smooth.",
+      }

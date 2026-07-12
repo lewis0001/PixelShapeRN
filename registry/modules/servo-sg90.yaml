@@ -1,0 +1,39 @@
+id: servo-sg90
+name: SG90 micro servo
+category: actuator
+electrical:
+  vcc: "4.0-6.0V"
+  logic_v: 3.3
+  current_ma: { typ: 150, max: 700 }
+  pins:
+    - { name: vcc, type: 5v, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: sig, type: pwm, required: true }
+firmware:
+  driver: Servo_Std
+  params: { min_us: 500, max_us: 2400, deg_min: 0, deg_max: 180, attach_stagger_ms: 60 }
+mech:
+  dims_mm: [23, 12.2, 29]
+  mass_g: 9
+  mount: { pattern: sg90_pocket, screws: m2x8_selftap }
+wiring:
+  connector: servo_3pin
+  wire_colors: { vcc: red, gnd: brown, sig: orange }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "SG90 servo",
+      url: "https://www.aliexpress.com/w/wholesale-sg90.html",
+      price_usd: 2.00,
+      affiliate_key: ali,
+    }
+docs:
+  blurb: Small hobby servo, rotates 0–180°.
+  datasheet_url: ""
+  troubleshooting:
+    - {
+        symptom: "Servo buzzes at rest",
+        fix: "Normal under light load; if hot, check nothing is jamming the horn.",
+      }
+sim:
+  kind: servo

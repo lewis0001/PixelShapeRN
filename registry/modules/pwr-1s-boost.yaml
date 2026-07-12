@@ -1,0 +1,51 @@
+id: pwr-1s-boost
+name: 1S Li-ion power board (charger + 5V boost)
+category: power
+electrical:
+  vcc: "3.0-4.2V in / 5V out"
+  logic_v: 3.3
+  # Own consumption; the boost stage passes battery power through to the robot.
+  current_ma: { typ: 10, max: 30 }
+  pins:
+    - { name: 5v, type: 5v, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: out_switch_a, type: switch, required: false }
+    - { name: out_switch_b, type: switch, required: false }
+    - { name: vbat, type: vbat, required: false }
+firmware:
+  driver: PowerMon
+  params: { vbat_adc: null }
+mech:
+  dims_mm: [70, 20, 15]
+  mass_g: 25
+  mount: { pattern: pcb_m2_2hole_18650, screws: m2x6_selftap }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { 5v: red, gnd: black, out_switch_a: white, out_switch_b: grey, vbat: purple }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "18650 charger + 5V boost shield (USB-C)",
+      url: "https://www.aliexpress.com/w/wholesale-18650-charging-boost-module.html",
+      price_usd: 2.50,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "1S 18650 charge/boost board (2-pack)",
+      url: "https://www.amazon.com/s?k=18650+charger+5v+boost+module",
+      price_usd: 9.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: Powers the whole robot from one 18650 cell and recharges it over USB-C. The battery is NOT included or shipped — buy a protected 18650 cell from a local shop.
+  datasheet_url: ""
+  troubleshooting:
+    - {
+        symptom: "Robot won't turn on",
+        fix: "Check the 18650 is inserted with + facing the mark, the slide switch is on, and the cell has charge — plug in USB-C and look for the charging light.",
+      }
+    - {
+        symptom: "Robot dies the moment the motors start",
+        fix: "The cell is nearly empty or worn out — charge it fully, or try a known-good branded protected cell.",
+      }

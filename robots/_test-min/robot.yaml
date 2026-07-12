@@ -1,0 +1,43 @@
+schema_version: 1
+robot:
+  id: _test-min
+  name: Test Min
+  tagline: Minimal fixture robot for golden tests.
+  version: 1.0.0
+  size_class: palm
+  difficulty: beginner
+  est_build_minutes: 10
+  hero_color: "#4488ff"
+
+modules:
+  - { id: core, ref: core-esp32s3-devkit, label: Brain }
+  - { id: eyes, ref: led-ws2812-2, label: Eyes }
+  - { id: buzz, ref: buzzer-passive, label: Beeper }
+
+connections:
+  - { from: core.gpio38, to: eyes.din, len_mm: 40 }
+  - { from: core.5v, to: eyes.vcc, len_mm: 40 }
+  - { from: core.gnd, to: eyes.gnd, len_mm: 40 }
+  - { from: core.gpio16, to: buzz.sig, len_mm: 30 }
+  - { from: core.gnd, to: buzz.gnd, len_mm: 30 }
+
+printed_parts:
+  - {
+      id: plate,
+      script: plate.py,
+      params: { l: 60, w: 40, t: 3 },
+      qty: 1,
+      material: PLA,
+      color_role: body,
+    }
+
+fasteners:
+  - { ref: m2x6_selftap, qty: 2 }
+
+assembly: assembly.yaml
+
+behaviors:
+  - { id: blink, file: behaviors/blink.json, default: true }
+
+firmware:
+  autostart_behavior: blink

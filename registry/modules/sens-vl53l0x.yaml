@@ -1,0 +1,52 @@
+id: sens-vl53l0x
+name: VL53L0X time-of-flight distance sensor
+category: sensor
+electrical:
+  vcc: "2.6-3.5V"
+  logic_v: 3.3
+  current_ma: { typ: 19, max: 40 }
+  pins:
+    - { name: vcc, type: 3v3, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: sda, type: i2c_sda, required: true }
+    - { name: scl, type: i2c_scl, required: true }
+    - { name: xshut, type: gpio, required: false }
+firmware:
+  driver: Range_VL53L0X
+  params: {}
+mech:
+  dims_mm: [25, 10.7, 3]
+  mass_g: 1
+  mount: { pattern: pcb_m2_2hole_20mm, screws: m2x6_selftap }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { vcc: red, gnd: black, sda: blue, scl: yellow, xshut: white }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "VL53L0X module",
+      url: "https://www.aliexpress.com/w/wholesale-vl53l0x.html",
+      price_usd: 2.50,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "VL53L0X (3-pack)",
+      url: "https://www.amazon.com/s?k=vl53l0x",
+      price_usd: 12.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: The robot's distance eye — it fires an invisible laser and times the bounce, out to about 2 m.
+  datasheet_url: https://www.st.com/resource/en/datasheet/vl53l0x.pdf
+  troubleshooting:
+    - {
+        symptom: "Distance always reads 0 or a huge number",
+        fix: "SDA and SCL are probably swapped — swap the blue and yellow wires at the brain.",
+      }
+    - {
+        symptom: "Readings are jumpy or too short",
+        fix: "Peel the tiny protective film off the sensor window and keep wires out of its view.",
+      }
+sim:
+  kind: tof_raycast

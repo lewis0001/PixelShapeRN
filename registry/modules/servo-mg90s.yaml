@@ -1,0 +1,50 @@
+id: servo-mg90s
+name: MG90S metal-gear micro servo
+category: actuator
+electrical:
+  vcc: "4.0-6.0V"
+  logic_v: 3.3
+  current_ma: { typ: 200, max: 900 }
+  pins:
+    - { name: vcc, type: 5v, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: sig, type: pwm, required: true }
+firmware:
+  driver: Servo_Std
+  params: { min_us: 500, max_us: 2400, deg_min: 0, deg_max: 180, attach_stagger_ms: 60 }
+mech:
+  dims_mm: [23, 12.2, 29]
+  mass_g: 13.4
+  mount: { pattern: sg90_pocket, screws: m2x8_selftap }
+wiring:
+  connector: servo_3pin
+  wire_colors: { vcc: red, gnd: brown, sig: orange }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "MG90S servo",
+      url: "https://www.aliexpress.com/w/wholesale-mg90s.html",
+      price_usd: 3.50,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "MG90S servos (4-pack)",
+      url: "https://www.amazon.com/s?k=mg90s+servo",
+      price_usd: 15.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: Like the SG90 but with metal gears — shrugs off knocks and stalls that would strip a plastic servo.
+  datasheet_url: ""
+  troubleshooting:
+    - {
+        symptom: "Servo buzzes at rest",
+        fix: "Normal under light load; if it gets hot, check nothing is jamming the horn.",
+      }
+    - {
+        symptom: "Servo jitters or resets the robot",
+        fix: "It draws a lot when straining — check the battery is charged and the horn isn't hitting an end stop.",
+      }
+sim:
+  kind: servo

@@ -1,0 +1,52 @@
+id: imu-mpu6050
+name: MPU-6050 6-axis IMU
+category: sensor
+electrical:
+  vcc: "3.3-5V"
+  logic_v: 3.3
+  current_ma: { typ: 4, max: 10 }
+  pins:
+    - { name: vcc, type: 3v3, required: true }
+    - { name: gnd, type: gnd, required: true }
+    - { name: sda, type: i2c_sda, required: true }
+    - { name: scl, type: i2c_scl, required: true }
+    - { name: int, type: gpio, required: false }
+firmware:
+  driver: IMU_6050
+  params: {}
+mech:
+  dims_mm: [21, 16, 3]
+  mass_g: 2
+  mount: { pattern: pcb_m2_2hole_15mm, screws: m2x6_selftap }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { vcc: red, gnd: black, sda: blue, scl: yellow, int: white }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "GY-521 MPU-6050 module",
+      url: "https://www.aliexpress.com/w/wholesale-mpu6050.html",
+      price_usd: 2.00,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "MPU-6050 (3-pack)",
+      url: "https://www.amazon.com/s?k=mpu6050",
+      price_usd: 9.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: Feels tilt, turns and bumps. Not used by the rover — reserved for the Phase 6 robots.
+  datasheet_url: https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Datasheet1.pdf
+  troubleshooting:
+    - {
+        symptom: "Sensor not detected",
+        fix: "Check SDA and SCL aren't swapped and that VCC goes to 3.3V — it shares the same two I2C wires as other sensors.",
+      }
+    - {
+        symptom: "Angles drift over time",
+        fix: "Keep the robot perfectly still for the first two seconds after switch-on so the gyro can calibrate.",
+      }
+sim:
+  kind: imu

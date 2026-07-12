@@ -1,0 +1,56 @@
+id: core-esp32s3-devkit
+name: ESP32-S3-DevKitC-1 dev board (N8R2)
+category: core
+electrical:
+  vcc: "5V (USB-C or 5V pin)"
+  logic_v: 3.3
+  current_ma: { typ: 120, max: 450 }
+  pins:
+    - { name: 5v, type: 5v, required: false }
+    - { name: 3v3, type: 3v3, required: false }
+    - { name: gnd, type: gnd, required: false }
+firmware:
+  driver: CoreS3Devkit
+  params:
+    # Capability map used by the validator and generators. GPIOs are addressed
+    # as core.gpio<N> in robot manifests; they are not enumerated as pins here.
+    available_gpios:
+      [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 21, 38, 39, 40, 41, 42, 47, 48]
+    adc1_gpios: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    # 0/3/45/46 strapping, 19/20 USB D-/D+, 26-37 flash/PSRAM region kept
+    # off-limits conservatively, 43/44 UART0.
+    reserved_gpios: [0, 3, 19, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 43, 44, 45, 46]
+mech:
+  dims_mm: [69, 25.5, 12]
+  mass_g: 10
+  mount: { pattern: pcb_m2_4hole_devkitc1, screws: m2x6_selftap }
+wiring:
+  connector: dupont_2_54
+  wire_colors: { 5v: red, 3v3: orange, gnd: black }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "ESP32-S3-DevKitC-1 N8R2",
+      url: "https://www.aliexpress.com/w/wholesale-esp32-s3-devkitc-1.html",
+      price_usd: 8.00,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "ESP32-S3 DevKitC-1",
+      url: "https://www.amazon.com/s?k=esp32-s3+devkitc-1",
+      price_usd: 12.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: The robot's brain — an ESP32-S3 board with Wi-Fi, USB-C and plenty of pins for every module.
+  datasheet_url: https://docs.espressif.com/projects/esp32-s3-devkitc-1/en/latest/user_guide.html
+  troubleshooting:
+    - {
+        symptom: "Computer doesn't see the board over USB",
+        fix: "Use a USB-C cable that carries data (many only charge), and plug into the port labelled USB, not UART.",
+      }
+    - {
+        symptom: "Upload fails or times out",
+        fix: "Hold the BOOT button while plugging in the cable, then try the upload again.",
+      }

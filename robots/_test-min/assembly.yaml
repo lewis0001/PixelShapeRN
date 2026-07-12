@@ -1,0 +1,9 @@
+poses:
+  plate: { xyz: [0, 0, 0], rpy: [0, 0, 0] }
+  core: { xyz: [0, 0, 4], rpy: [0, 0, 0], explode: [0, 0, 25] }
+  eyes: { xyz: [22, 0, 4], rpy: [0, 0, 0], explode: [0, 0, 20] }
+  buzz: { xyz: [-18, 0, 4], rpy: [0, 0, 0], explode: [0, 0, 20] }
+
+steps:
+  - { id: 1, title: Mount the brain, adds: [core], fasteners: [m2x6_selftap x2] }
+  - { id: 2, title: Eyes and beeper, adds: [eyes, buzz], note: Press-fit both boards. }

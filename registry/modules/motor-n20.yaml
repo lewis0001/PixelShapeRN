@@ -1,0 +1,46 @@
+id: motor-n20
+name: N20 metal-gear motor (6V 150RPM)
+category: actuator
+electrical:
+  vcc: "6V nominal"
+  logic_v: 0
+  current_ma: { typ: 120, max: 700 }
+  pins:
+    - { name: m1, type: motor_out, required: true }
+    - { name: m2, type: motor_out, required: true }
+mech:
+  dims_mm: [12, 10, 26]
+  mass_g: 9.5
+  mount: { pattern: clamp_n20, screws: m2x8_selftap }
+wiring:
+  connector: solder_tab
+  wire_colors: { m1: red, m2: black }
+sourcing:
+  - {
+      vendor: aliexpress,
+      label: "N20 gear motor 6V 150RPM",
+      url: "https://www.aliexpress.com/w/wholesale-n20-gear-motor.html",
+      price_usd: 3.00,
+      affiliate_key: ali,
+    }
+  - {
+      vendor: amazon,
+      label: "N20 gear motors (2-pack)",
+      url: "https://www.amazon.com/s?k=n20+gear+motor+6v",
+      price_usd: 10.99,
+      affiliate_key: amz,
+    }
+docs:
+  blurb: A tiny gearbox motor that turns one wheel. The DRV8833 driver board does the controlling.
+  datasheet_url: ""
+  troubleshooting:
+    - {
+        symptom: "One wheel never spins",
+        fix: "Check both motor wires are firmly seated at the driver board and that the thin solder tabs on the motor haven't snapped off.",
+      }
+    - {
+        symptom: "Motor whirrs but the wheel barely moves",
+        fix: "Push the wheel further onto the D-shaped shaft until it seats — it should not slip when you twist it by hand.",
+      }
+sim:
+  kind: motor_dc

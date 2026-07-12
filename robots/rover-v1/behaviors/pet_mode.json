@@ -1,0 +1,69 @@
+{
+  "bsj": 1,
+  "name": "pet_mode",
+  "vars": [],
+  "handlers": [
+    {
+      "event": { "type": "on_start" },
+      "body": [
+        { "op": "led", "r": 40, "g": 0, "b": 60 },
+        { "op": "tone", "hz": 523, "ms": 120 },
+        { "op": "wait", "ms": 140 },
+        { "op": "tone", "hz": 784, "ms": 160 }
+      ]
+    },
+    {
+      "event": { "type": "on_tick", "ms": 100 },
+      "body": [
+        {
+          "op": "if",
+          "cond": { "cmp": [{ "sensor": "range.mm" }, "<", 80] },
+          "body": [
+            { "op": "led", "r": 120, "g": 0, "b": 0 },
+            { "op": "tone", "hz": 1800, "ms": 80 },
+            { "op": "drive_time", "l": -55, "r": -55, "ms": 250 }
+          ],
+          "else": [
+            {
+              "op": "if",
+              "cond": { "cmp": [{ "sensor": "range.mm" }, "<", 200] },
+              "body": [
+                { "op": "led", "r": 0, "g": 90, "b": 90 },
+                { "op": "drive", "l": 40, "r": 40 },
+                {
+                  "op": "if",
+                  "cond": { "cmp": [{ "rand": [0, 6] }, "==", 0] },
+                  "body": [{ "op": "tone", "hz": 1568, "ms": 60 }]
+                }
+              ],
+              "else": [
+                { "op": "stop" },
+                { "op": "led", "r": 20, "g": 0, "b": 40 },
+                {
+                  "op": "if",
+                  "cond": { "cmp": [{ "rand": [0, 20] }, "==", 0] },
+                  "body": [{ "op": "tone", "hz": 220, "ms": 300 }]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "event": { "type": "on_button" },
+      "body": [
+        { "op": "stop" },
+        { "op": "led", "r": 120, "g": 80, "b": 0 },
+        { "op": "tone", "hz": 1047, "ms": 90 },
+        { "op": "wait", "ms": 110 },
+        { "op": "tone", "hz": 1319, "ms": 90 },
+        { "op": "wait", "ms": 110 },
+        { "op": "tone", "hz": 1568, "ms": 90 },
+        { "op": "wait", "ms": 110 },
+        { "op": "tone", "hz": 2093, "ms": 180 },
+        { "op": "led_off" }
+      ]
+    }
+  ]
+}
