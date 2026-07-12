@@ -1,0 +1,408 @@
+<?xml version="1.0" ?>
+<robot name="rover-v1">
+  <link name="chassis">
+    <inertial>
+      <origin xyz="0 0 0.008" rpy="0 0 0" />
+      <mass value="0.0376877" />
+      <inertia ixx="1.80022e-05" ixy="0" ixz="0" iyy="2.97482e-05" iyz="0" izz="4.61423e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/chassis.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/chassis.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="motor_left">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.0095" />
+      <inertia ixx="6.14333e-07" ixy="0" ixz="0" iyy="6.49167e-07" iyz="0" izz="1.93167e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/motor_left.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/motor_left.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="motor_right">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.0095" />
+      <inertia ixx="6.14333e-07" ixy="0" ixz="0" iyy="6.49167e-07" iyz="0" izz="1.93167e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/motor_right.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/motor_right.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="wheel_1">
+    <inertial>
+      <origin xyz="0 0 0.007" rpy="0 0 0" />
+      <mass value="0.0141252" />
+      <inertia ixx="2.30443e-06" ixy="0" ixz="0" iyy="2.30443e-06" iyz="0" izz="4.14743e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/wheel_1.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/wheel_1.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="wheel_2">
+    <inertial>
+      <origin xyz="0 0 0.007" rpy="0 0 0" />
+      <mass value="0.0141252" />
+      <inertia ixx="2.30443e-06" ixy="0" ixz="0" iyy="2.30443e-06" iyz="0" izz="4.14743e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/wheel_2.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/wheel_2.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="caster_mount">
+    <inertial>
+      <origin xyz="0 0 0.004" rpy="0 0 0" />
+      <mass value="0.00253952" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1.08353e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/caster_mount.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/caster_mount.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="m3_ball_6mm">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/m3_ball_6mm.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/m3_ball_6mm.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="mdrv">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.002" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1.04167e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mdrv.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/mdrv.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="pwr">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.025" />
+      <inertia ixx="1.30208e-06" ixy="0" ixz="0" iyy="1.06771e-05" iyz="0" izz="1.10417e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/pwr.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/pwr.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="sw">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/sw.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/sw.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="core">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.01" />
+      <inertia ixx="6.61875e-07" ixy="0" ixz="0" iyy="4.0875e-06" iyz="0" izz="4.50938e-06" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/core.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/core.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="range">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/range.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/range.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="line">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.003" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="4.0625e-07" iyz="0" izz="4.25e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/line.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/line.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="eyes">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.001" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/eyes.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/eyes.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="buzz">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.002" />
+      <inertia ixx="1e-07" ixy="0" ixz="0" iyy="1e-07" iyz="0" izz="1e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/buzz.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/buzz.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="head">
+    <inertial>
+      <origin xyz="0 0 0.012" rpy="0 0 0" />
+      <mass value="0.00757252" />
+      <inertia ixx="6.15898e-07" ixy="0" ixz="0" iyy="1.09297e-06" iyz="0" izz="9.81903e-07" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/head.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/head.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="lid">
+    <inertial>
+      <origin xyz="0 0 0.0025" rpy="0 0 0" />
+      <mass value="0.024065" />
+      <inertia ixx="9.87666e-06" ixy="0" ixz="0" iyy="1.7024e-05" iyz="0" izz="2.68004e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/lid.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/lid.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="buzz_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="buzz" />
+    <origin xyz="0.032 0.02 0.006" rpy="0 0 0" />
+  </joint>
+  <joint name="caster_mount_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="caster_mount" />
+    <origin xyz="0.038 0 0.002" rpy="0 0 0" />
+  </joint>
+  <joint name="core_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="core" />
+    <origin xyz="-0.01 0.018 0.008" rpy="0 0 0" />
+  </joint>
+  <joint name="eyes_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="eyes" />
+    <origin xyz="0.042 0 0.024" rpy="0 -0.174533 0" />
+  </joint>
+  <joint name="head_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="head" />
+    <origin xyz="0.04 0 0.018" rpy="0 -0.174533 0" />
+  </joint>
+  <joint name="lid_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="lid" />
+    <origin xyz="0 0 0.026" rpy="0 0 0" />
+  </joint>
+  <joint name="line_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="line" />
+    <origin xyz="0.04 0 0.002" rpy="0 0 0" />
+  </joint>
+  <joint name="m3_ball_6mm_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="m3_ball_6mm" />
+    <origin xyz="0.038 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="mdrv_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="mdrv" />
+    <origin xyz="-0.038 0 0.006" rpy="0 0 0" />
+  </joint>
+  <joint name="motor_left_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="motor_left" />
+    <origin xyz="-0.028 0.03 0.008" rpy="0 0 1.5708" />
+  </joint>
+  <joint name="motor_right_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="motor_right" />
+    <origin xyz="-0.028 -0.03 0.008" rpy="0 0 -1.5708" />
+  </joint>
+  <joint name="pwr_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="pwr" />
+    <origin xyz="0 -0.022 0.008" rpy="0 0 0" />
+  </joint>
+  <joint name="range_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="range" />
+    <origin xyz="0.042 0 0.02" rpy="0 -0.174533 0" />
+  </joint>
+  <joint name="sw_joint" type="fixed">
+    <parent link="chassis" />
+    <child link="sw" />
+    <origin xyz="-0.02 -0.034 0.01" rpy="0 0 0" />
+  </joint>
+  <joint name="wheel_1_joint" type="continuous">
+    <parent link="chassis" />
+    <child link="wheel_1" />
+    <origin xyz="-0.028 0.044 0.008" rpy="1.5708 0 0" />
+    <axis xyz="0 -1 0" />
+  </joint>
+  <joint name="wheel_2_joint" type="continuous">
+    <parent link="chassis" />
+    <child link="wheel_2" />
+    <origin xyz="-0.028 -0.044 0.008" rpy="-1.5708 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+</robot>
